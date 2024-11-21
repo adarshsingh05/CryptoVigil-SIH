@@ -13,6 +13,7 @@ export default function Login() {
   const router = useRouter(); // Initialize the router
   useEffect(() => {
     if (isLoggedIn) {
+     
       setIsLoggedIn(true); // Set loading to true when login is successful
       setTimeout(() => {
         router.push("/LandingPage"); // Redirect to LandingPage after 5 seconds

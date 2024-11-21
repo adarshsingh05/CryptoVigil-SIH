@@ -6,6 +6,9 @@ const sendVerificationEmail = require('../utils/sendEmail');
 const router = express.Router();
 
 
+
+
+
 // Middleware to verify JWT token
 const verifyToken = (req, res, next) => {
   const token = req.headers['authorization']?.split(' ')[1]; // Extract token from Authorization header
@@ -21,7 +24,17 @@ const verifyToken = (req, res, next) => {
     next();
   });
 };
-
+// Logout
+// Logout
+router.post('/logout', verifyToken, (req, res) => {
+  try {
+    // No need to do anything specific server-side, as the token is stateless
+    res.json({ msg: 'Logged out successfully' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
 // Route to fetch user details
 router.get('/user', verifyToken, async (req, res) => {
   try {
