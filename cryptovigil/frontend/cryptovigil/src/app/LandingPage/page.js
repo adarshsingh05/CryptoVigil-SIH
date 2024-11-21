@@ -4,25 +4,24 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Home = () => {
-
   const logout = async () => {
-    const token = localStorage.getItem('token'); // Retrieve the token
+    const token = localStorage.getItem("token"); // Retrieve the token
     if (!token) {
       console.error("No token found");
       return; // Exit the function if no token is found
     }
-  
+
     try {
-      const response = await fetch('http://localhost:4000/api/auth/logout', {
-        method: 'POST',
+      const response = await fetch("http://localhost:4000/api/auth/logout", {
+        method: "POST",
         headers: {
-          'Authorization': `Bearer ${token}`, // Attach the token
+          Authorization: `Bearer ${token}`, // Attach the token
         },
       });
-  
+
       if (response.ok) {
         // Remove the token from localStorage after successful logout
-        localStorage.removeItem('token');
+        localStorage.removeItem("token");
         console.log("Logged out successfully");
         window.location.reload();
       } else {
@@ -32,8 +31,7 @@ const Home = () => {
       console.error("Error during logout:", error);
     }
   };
-  
-  
+
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -87,52 +85,46 @@ const Home = () => {
 
       {/* Navbar */}
       <header className="relative z-10 p-6 flex justify-center items-center">
-  <nav className="flex space-x-8 font-[var(--font-ropa-sans)]">
-    <Link
-      href="/"
-      className="text-white border-2 border-transparent hover:text-green-500 hover:border-green-500 hover:rounded-full py-2 px-4 transition-all duration-300"
-    >
-      HOME
-    </Link>
-    <Link
-      href="/explore"
-      className="text-white border-2 border-transparent hover:text-green-500 hover:border-green-500 hover:rounded-full py-2 px-4 transition-all duration-300"
-    >
-      EXPLORE
-    </Link>
+        <nav className="flex space-x-8 font-[var(--font-ropa-sans)]">
+          <Link
+            href="/"
+            className="text-white border-2 border-transparent hover:text-green-500 hover:border-green-500 hover:rounded-full py-2 px-4 transition-all duration-300"
+          >
+            HOME
+          </Link>
+          <Link
+            href="/explore"
+            className="text-white border-2 border-transparent hover:text-green-500 hover:border-green-500 hover:rounded-full py-2 px-4 transition-all duration-300"
+          >
+            EXPLORE
+          </Link>
 
-    {/* Conditionally render Login/Sign Up or Dashboard */}
- 
+          {/* Conditionally render Login/Sign Up or Dashboard */}
 
-    <Link
-      href="/profile"
-      className="text-white border-2 border-transparent hover:text-green-500 hover:border-green-500 hover:rounded-full py-2 px-4 transition-all duration-300"
-    >
-      PROFILE
-    </Link>
-    {user ? (
-      <Link
-        href="/LandingPage"
-        onClick={logout}
-        className="text-white border-2 border-transparent hover:text-green-500 hover:border-green-500 hover:rounded-full py-2 px-4 transition-all duration-300"
-      >
-        LOGOUT
-      </Link>
-    ) : (
-      <Link
-        href="/Login"
-        className="text-white border-2 border-transparent hover:text-green-500 hover:border-green-500 hover:rounded-full py-2 px-4 transition-all duration-300"
-      >
-        LOG IN/SIGN UP
-      </Link>
-    )}
-  </nav>
-</header>
-
-
-
-
-
+          <Link
+            href="/profile"
+            className="text-white border-2 border-transparent hover:text-green-500 hover:border-green-500 hover:rounded-full py-2 px-4 transition-all duration-300"
+          >
+            PROFILE
+          </Link>
+          {user ? (
+            <Link
+              href="/LandingPage"
+              onClick={logout}
+              className="text-white border-2 border-transparent hover:text-green-500 hover:border-green-500 hover:rounded-full py-2 px-4 transition-all duration-300"
+            >
+              LOGOUT
+            </Link>
+          ) : (
+            <Link
+              href="/Login"
+              className="text-white border-2 border-transparent hover:text-green-500 hover:border-green-500 hover:rounded-full py-2 px-4 transition-all duration-300"
+            >
+              LOG IN/SIGN UP
+            </Link>
+          )}
+        </nav>
+      </header>
 
       {/* Hero Section */}
       <section className="relative z-10 flex flex-col items-center justify-center text-center py-20">
@@ -172,7 +164,10 @@ const Home = () => {
       <footer className="relative z-10 text-center py-8">
         <p className="text-sm">
           Have questions or need assistance?{" "}
-          <Link href="/contact" className="text-white hover:underline font-bold">
+          <Link
+            href="/contact"
+            className="text-white hover:underline font-bold"
+          >
             Reach out to us
           </Link>{" "}
           — we're here to help secure your crypto journey!
@@ -191,87 +186,243 @@ const Home = () => {
           Our <span className="text-green-700">Services</span>
         </p>
 
-      
+        {/* Card 1 */}
+        <div className="flex justify-center gap-8">
           {/* Card 1 */}
-          <div className="flex justify-center gap-8">
-  {/* Card 1 */}
-  <div className="bg-gradient-to-b from-[#63D134] to-black text-white shadow-lg p-6 flex flex-col items-center justify-between h-[28rem] w-[13rem] m-2">
-    <div className="text-center">
-      <h3 className="text-xl font-bold mb-4">
-        Wallet Management & Compliance
-      </h3>
-      <hr></hr>
-      <p className="text-lg mb-6 mt-2">
-        Link multiple wallets, monitor balances, and flag risks seamlessly, with integrated KYC verification ensuring regulatory compliance.
-      </p>
-    </div>
-    <Link
-      href="#"
-      className="inline-block py-2 px-6 border border-white text-white font-semibold rounded-full hover:bg-green-600 hover:text-white transition duration-300"
-    >
-      Explore
-    </Link>
-  </div>
+          <div className="bg-gradient-to-b from-[#63D134] to-black text-white shadow-lg p-6 flex flex-col items-center justify-between h-[28rem] w-[13rem] m-2">
+            <div className="text-center">
+              <h3 className="text-xl font-bold mb-4">
+                Wallet Management & Compliance
+              </h3>
+              <hr></hr>
+              <p className="text-lg mb-6 mt-2">
+                Link multiple wallets, monitor balances, and flag risks
+                seamlessly, with integrated KYC verification ensuring regulatory
+                compliance.
+              </p>
+            </div>
+            <Link
+              href="#"
+              className="inline-block py-2 px-6 border border-white text-white font-semibold rounded-full hover:bg-green-600 hover:text-white transition duration-300"
+            >
+              Explore
+            </Link>
+          </div>
 
-  {/* Card 2 */}
-  <div className="bg-gradient-to-b from-[#63D134] to-black text-white shadow-lg p-6 flex flex-col items-center justify-between h-[28rem] w-[13rem]  m-2">
-    <div className="text-center">
-      <h3 className="text-xl font-bold mb-4">
-        Smart Notifications & Insights
-        </h3>
-        <hr></hr>
-        <p className="text-lg mb-6 mt-2">
-        Get real-time updates on flagged transactions and access a user-friendly dashboard for advanced analytics and wallet insights.
-      </p>
-    </div>
-    <Link
-      href="#"
-      className="inline-block py-2 px-6 border border-white text-white font-semibold rounded-full hover:bg-green-600 hover:text-white transition duration-300"
-    >
-      Explore
-    </Link>
-  </div>
+          {/* Card 2 */}
+          <div className="bg-gradient-to-b from-[#63D134] to-black text-white shadow-lg p-6 flex flex-col items-center justify-between h-[28rem] w-[13rem]  m-2">
+            <div className="text-center">
+              <h3 className="text-xl font-bold mb-4">
+                Smart Notifications & Insights
+              </h3>
+              <hr></hr>
+              <p className="text-lg mb-6 mt-2">
+                Get real-time updates on flagged transactions and access a
+                user-friendly dashboard for advanced analytics and wallet
+                insights.
+              </p>
+            </div>
+            <Link
+              href="#"
+              className="inline-block py-2 px-6 border border-white text-white font-semibold rounded-full hover:bg-green-600 hover:text-white transition duration-300"
+            >
+              Explore
+            </Link>
+          </div>
 
-  {/* Card 3 */}
-  <div className="bg-gradient-to-b from-[#63D134] to-black text-white shadow-lg p-6 flex flex-col items-center justify-between h-[28rem] w-[13rem]  m-2">
-    <div className="text-center">
-      <h3 className="text-xl font-bold mb-4">
-        Trusted Exchange Support
-      </h3>
-      <hr></hr>
-      <p className="text-lg mb-6 mt-2">
-        Connect effortlessly with leading platforms like Binance, Coinbase, and Kraken for a streamlined and secure crypto experience.
-      </p>
-    </div>
-    <Link
-      href="#"
-      className="inline-block py-2 px-6 border border-white text-white font-semibold rounded-full hover:bg-green-600 hover:text-white transition duration-300"
-    >
-      Explore
-    </Link>
-  </div>
+          {/* Card 3 */}
+          <div className="bg-gradient-to-b from-[#63D134] to-black text-white shadow-lg p-6 flex flex-col items-center justify-between h-[28rem] w-[13rem]  m-2">
+            <div className="text-center">
+              <h3 className="text-xl font-bold mb-4">
+                Trusted Exchange Support
+              </h3>
+              <hr></hr>
+              <p className="text-lg mb-6 mt-2">
+                Connect effortlessly with leading platforms like Binance,
+                Coinbase, and Kraken for a streamlined and secure crypto
+                experience.
+              </p>
+            </div>
+            <Link
+              href="#"
+              className="inline-block py-2 px-6 border border-white text-white font-semibold rounded-full hover:bg-green-600 hover:text-white transition duration-300"
+            >
+              Explore
+            </Link>
+          </div>
 
-  {/* Card 4 */}
-  <div className="bg-gradient-to-b from-[#63D134] to-black text-white shadow-lg p-6 flex flex-col items-center justify-between h-[28rem] w-[13rem]  m-2">
-    <div className="text-center">
-      <h3 className="text-xl font-bold mb-4">
-        Advanced Security Features
-      </h3>
-      <hr></hr>
-      <p className="text-lg mb-6 mt-2">
-        Protect your assets with multi-layered encryption, two-factor authentication, and real-time risk monitoring.
-      </p>
-    </div>
-    <Link
-      href="#"
-      className="inline-block py-2 px-6 border border-white text-white font-semibold rounded-full hover:bg-green-600 hover:text-white transition duration-300"
-    >
-      Explore
-    </Link>
+          {/* Card 4 */}
+          <div className="bg-gradient-to-b from-[#63D134] to-black text-white shadow-lg p-6 flex flex-col items-center justify-between h-[28rem] w-[13rem]  m-2">
+            <div className="text-center">
+              <h3 className="text-xl font-bold mb-4">
+                Advanced Security Features
+              </h3>
+              <hr></hr>
+              <p className="text-lg mb-6 mt-2">
+                Protect your assets with multi-layered encryption, two-factor
+                authentication, and real-time risk monitoring.
+              </p>
+            </div>
+            <Link
+              href="#"
+              className="inline-block py-2 px-6 border border-white text-white font-semibold rounded-full hover:bg-green-600 hover:text-white transition duration-300"
+            >
+              Explore
+            </Link>
+          </div>
+        </div>
+      </section>
+      {/* Footer */}
+      <footer className="relative z-10 bg-[#21281E] text-white py-10">
+      <div className="mb-3 flex justify-between items-center">
+  <div>
+    <img
+      src="/text.png"
+      alt="cryptovigil logo"
+      className="h-7 w-72 ml-16"
+    />
+  </div>
+  <div className="flex space-x-4 mr-20">
+    <img src="/instagram-logo (1).png" alt="Instagram" className="h-6 w-6" />
+    <img src="/twitter.png" alt="Twitter" className="h-6 w-6" />
+    <img src="/linkedin.png" alt="LinkedIn" className="h-6 w-6" />
+    <img src="/github.png" alt="GitHub" className="h-6 w-6" />
   </div>
 </div>
 
-      </section>
+        <div className="h-0.5 w-[92%] bg-[#63D134] ml-16 mb-16 mt-6"></div>
+        <div className="container mx-auto px-6 lg:px-16">
+          {/* Top Section */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-sm border-b border-gray-600 pb-6">
+            {/* Quick Links */}
+            <div>
+              <h3 className="font-semibold text-lg mb-4">Quick Links</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/">Home</Link>
+                </li>
+                <li>
+                  <Link href="/features">Features</Link>
+                </li>
+                <li>
+                  <Link href="/faqs">FAQs</Link>
+                </li>
+                <li>
+                  <Link href="/contact">Contact Us</Link>
+                </li>
+                <li>
+                  <Link href="/legal">Legal</Link>
+                </li>
+                <li>
+                  <Link href="/community">Community Forum</Link>
+                </li>
+                <li>
+                  <Link href="/help">Help Center</Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* About Us */}
+            <div>
+              <h3 className="font-semibold text-lg mb-4">About Us</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/our-mission">Our Mission</Link>
+                </li>
+                <li>
+                  <Link href="/team">Our Team</Link>
+                </li>
+                <li>
+                  <Link href="/story">Our Story</Link>
+                </li>
+                <li>
+                  <Link href="/careers">Careers</Link>
+                </li>
+                <li>
+                  <Link href="/press-media">Press & Media</Link>
+                </li>
+                <li>
+                  <Link href="/transparency">Transparency Center</Link>
+                </li>
+                <li>
+                  <Link href="/investors">Investors Relationships</Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Policy */}
+            <div>
+              <h3 className="font-semibold text-lg mb-4">Policy</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/privacy-policy">Privacy Policy</Link>
+                </li>
+                <li>
+                  <Link href="/risk-disclosure">Risk Disclosure</Link>
+                </li>
+                <li>
+                  <Link href="/terms-of-service">Terms of Service</Link>
+                </li>
+                <li>
+                  <Link href="/security-policy">Security Policy</Link>
+                </li>
+                <li>
+                  <Link href="/compliance-policy">Compliance Policy</Link>
+                </li>
+                <li>
+                  <Link href="/community-guidelines">Community Guidelines</Link>
+                </li>
+                <li>
+                  <Link href="/software-principles">Software Principles</Link>
+                </li>
+                <li>
+                  <Link href="/how-it-works">How our application works</Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Newsletter */}
+            <div>
+              <h3 className="font-semibold text-lg mb-4">
+                Subscribe to our newsletter
+              </h3>
+              <p className="text-gray-400 text-sm mb-4">
+                For product announcements and exclusive insights
+              </p>
+              <form className="flex items-center">
+                <input
+                  type="email"
+                  placeholder="Input your email"
+                  className="text-gray-800 bg-white w-64 border-none focus:outline-none  py-2 px-4"
+                />
+                <button
+                  type="submit"
+                  className="bg-green-500 text-white  py-2 px-2 hover:bg-green-600 transition-all"
+                >
+                  Subscribe
+                </button>
+              </form>
+            </div>
+          </div>
+          <div className="h-0.5 w-[100%] bg-[#63D134]  mb-6 "></div>
+
+
+          {/* Bottom Section */}
+          <div className="flex flex-col md:flex-row justify-between items-center pt-6 text-gray-400 text-xs">
+            <div className="flex space-x-4">
+              <Link href="/help">Help</Link>
+              <span>|</span>
+              <Link href="/privacy">Privacy</Link>
+              <span>|</span>
+              <Link href="/terms">Terms</Link>
+            </div>
+            <div className="mt-4 md:mt-0">
+              <span className="inline-block mr-2">🌐</span>
+              <span>English</span>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
