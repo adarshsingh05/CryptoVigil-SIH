@@ -272,6 +272,114 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <section className="relative py-10 h-screen">
+  {/* Image */}
+  <div className="relative h-full">
+    <Image
+      src="/bgsection3.png"
+      alt="Background"
+      layout="fill" // Fill the section
+      objectFit="cover" // Cover the entire section
+      className="rounded-lg shadow-lg"
+    />
+    {/* Custom Gradient Overlay */}
+    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/50" />
+
+    {/* Text Content - Left and Right */}
+    <div className="absolute inset-0 flex items-center justify-between px-6 md:px-16">
+      {/* Left Text */}
+      <div className="w-1/2 text-[#63D134] text-[36px] font-semibold justify-center sm:text-left ml-0 sm:ml-[100px]">
+        Why Choose
+        <div className="text-[64px] text-white text-left ml-[-20px]">
+          CryptoVigil?
+        </div>
+      </div>
+
+      {/* Right Text */}
+      <div className="w-1/2 text-white text-[36px] font-semibold text-left">
+        Trust • Security • Transparency
+        <div className="text-[25px] text-left mt-6">
+          Monitor, track, and secure your crypto with real-time alerts, wallet
+          tracking, and KYC compliance. Whether you're an individual or business,
+          safeguard your assets with confidence.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section className="relative py-10 h-screen -mt-[10px]">
+  {/* Image */}
+  <div className="relative h-full">
+    <Image
+      src="/bgsection4.png"
+      alt="Background"
+      layout="fill"
+      objectFit="cover"
+      className="rounded-lg shadow-lg opacity-90"
+    />
+
+    {/* Custom Gradient Overlay */}
+    <div
+      className="absolute inset-0"
+      style={{
+        background:
+          'linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 5%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%)',
+      }}
+    />
+
+    {/* Text Content */}
+    <div className="absolute inset-0 flex flex-col justify-center items-center px-6">
+      <div className="text-[50px] text-white font-bold text-center mb-8 mt-[20px]">
+        CONNECTING THE WORLD THROUGH CRYPTO TRANSPARENCY
+      </div>
+
+      {/* Cards Section */}
+      <div className="flex justify-between px-6 mt-[20px] gap-6">
+        {/* Card 1 */}
+        <div className="w-1/4 text-white text-[25px] font-semibold text-center p-6 rounded-lg shadow-lg">
+          <div>Global Accessibility With Any IP</div>
+          <div className="border-b-[3px] border-[#63D134] mt-2"></div>
+          <div className="font-light mt-[30px]">
+            Access anytime, anywhere—no borders. With multi-currency support, we
+            ensure inclusivity for users worldwide.
+          </div>
+        </div>
+
+        {/* Card 2 */}
+        <div className="w-1/4 text-white text-[25px] font-semibold text-center p-6 rounded-lg shadow-lg">
+          <div>Building Trust Across Borders</div>
+          <div className="border-b-[3px] border-[#63D134] mt-2"></div>
+          <div className="font-light mt-[30px]">
+            Promoting transparency builds trust globally. Seamless integration with
+            international exchanges ensures smooth cross-border transactions.
+          </div>
+        </div>
+
+        {/* Card 3 */}
+        <div className="w-1/4 text-white text-[25px] font-semibold text-center p-6 rounded-lg shadow-lg">
+          <div>Universal Security Standards</div>
+          <div className="border-b-[3px] border-[#63D134] mt-2"></div>
+          <div className="font-light mt-[30px]">
+            Adhering to global security standards. Real-time monitoring and KYC
+            compliance. Secure and fraud-free crypto transactions.
+          </div>
+        </div>
+
+        {/* Card 4 */}
+        <div className="w-1/4 text-white text-[25px] font-semibold text-center p-6 rounded-lg shadow-lg">
+          <div>Driving Global Collaboration</div>
+          <div className="border-b-[3px] border-[#63D134] mt-2"></div>
+          <div className="font-light mt-[30px]">
+            User-friendly dashboards and analytics drive growth. Secure insights
+            foster seamless global crypto partnerships.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
       {/* Footer */}
       <footer className="relative z-10 bg-[#21281E] text-white py-10">
       <div className="mb-3 flex justify-between items-center">
