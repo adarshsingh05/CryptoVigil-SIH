@@ -7,27 +7,21 @@
 
 @font-face {
   font-family: 'GeistMono';
-  src: url('fonts/GeistVF.woff') format('woff');
+  src: url('fonts/GiantRobots-BWZan.ttf') format('ttf');
  
-}
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
 }
 :root {
   --font-ropa-sans: 'Ropa Sans', sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  :root {
+    --radius: 0.5rem;
+ 
+  }
+ 
 }

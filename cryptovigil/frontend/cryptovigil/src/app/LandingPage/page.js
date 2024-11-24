@@ -1,9 +1,21 @@
 "use client";
+import Draggable from "react-draggable";
+import Modal from "../components/Modal";
 import { useEffect, useState } from "react";
+import { useRef } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
+import { Typewriter } from "react-simple-typewriter";
+
 
 const Home = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const draggableRef = useRef(null); // Create a ref for the draggable element
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
   const logout = async () => {
     const token = localStorage.getItem("token"); // Retrieve the token
     if (!token) {
@@ -31,9 +43,24 @@ const Home = () => {
       console.error("Error during logout:", error);
     }
   };
-
+  const [userIp, setUserIp] = useState('Loading...');
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    fetch('https://backend-ip.vercel.app/api/ip', {
+      method: 'GET',
+      credentials: 'include', 
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('IP Address:', data.ip);
+    })
+    .catch((error) => {
+      console.error('Error fetching IP:', error);
+    });
+  }, []);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -113,55 +140,65 @@ const Home = () => {
               onClick={logout}
               className="text-white border-2 border-transparent hover:text-green-500 hover:border-green-500 hover:rounded-full py-2 px-4 transition-all duration-300"
             >
-              LOGOUT
+              GET OUT
             </Link>
           ) : (
             <Link
               href="/Login"
               className="text-white border-2 border-transparent hover:text-green-500 hover:border-green-500 hover:rounded-full py-2 px-4 transition-all duration-300"
             >
-              LOG IN/SIGN UP
+              GET IN
             </Link>
           )}
         </nav>
       </header>
 
-      {/* Hero Section */}
-      <section className="relative z-10 flex flex-col items-center justify-center text-center py-20">
-        <Image
-          src="/text.png"
-          alt="CryptoVigil Logo"
-          width={600}
-          height={300}
-          className="max-w-full object-contain"
-        />
-        <p className="mt-6 text-lg">
-          Unmask the Chain—Track, Monitor, Protect.
-        </p>
-        <Link
-          href="/get-started"
-          className="mt-6 py-2 px-6 bg-[#63D134] text-white font-bold rounded-full hover:opacity-90"
-        >
-          Get Started!
-        </Link>
-      </section>
+     {/* Hero Section */}
+<section className="relative z-10 flex flex-col items-center justify-center text-center py-20">
+  <Image
+    src="/text.png"
+    alt="CryptoVigil Logo"
+    width={600}
+    height={300}
+    className="max-w-full object-contain"
+  />
+  <p className="mt-6 text-lg">
+    Unmask the Chain—Track, Monitor, Protect.
+  </p>
+  <Link
+    href="/get-started"
+    className="mt-4 py-2 px-6 bg-[#63D134] text-white font-bold rounded-full hover:opacity-90"
+  >
+    Get Started!
+  </Link>
+</section>
 
-      {/* Display User Info */}
-      <section className="relative z-10 text-center py-10">
-        {loading ? (
-          <p className="text-gray-400">Loading user information...</p>
-        ) : user ? (
-          <div>
-            <h2 className="text-2xl text-white">Welcome, {user.username}!</h2>
-            <p className="text-gray-400">Your email is: {user.email}</p>
-          </div>
-        ) : (
-          <p className="text-gray-400">Please log in to see your profile.</p>
-        )}
-      </section>
+{/* Display User Info */}
+<section className="relative z-10 text-center py-2">
+  <div>
+    {loading ? (
+      <p className="text-gray-400">Loading your information...</p>
+    ) : user ? (
+      <p className="text-3xl text-white font-medium">
+        Welcome Back,
+        <Typewriter
+          words={[` ${user.username}!`]}
+          loop={true}
+          typeSpeed={130}
+          deleteSpeed={70}
+          delaySpeed={100}
+        />
+      </p>
+    ) : (
+      <p className="text-gray-400">Please log in to see your profile.</p>
+    )}
+  </div>
+</section>
+
+
 
       {/* Footer Section */}
-      <footer className="relative z-10 text-center py-8">
+      <footer className="relative z-10 text-center py-8 flex-shrink-0">
         <p className="text-sm">
           Have questions or need assistance?{" "}
           <Link
@@ -288,15 +325,16 @@ const Home = () => {
     {/* Text Content - Left and Right */}
     <div className="absolute inset-0 flex items-center justify-between px-6 md:px-16">
       {/* Left Text */}
-      <div className="w-1/2 text-[#63D134] text-[36px] font-semibold justify-center sm:text-left ml-0 sm:ml-[100px]">
+      <div className="w-1/2 text-[#63D134] text-[36px] font-semibold  sm:text-left ml-[-10px] mb-7 sm:ml-[100px]">
         Why Choose
-        <div className="text-[64px] text-white text-left ml-[-20px]">
-          CryptoVigil?
+        <div className=" text-white ">
+         
+          <img src='/text.png' className="mt-5 mr-4"></img>
         </div>
       </div>
 
       {/* Right Text */}
-      <div className="w-1/2 text-white text-[36px] font-semibold text-left">
+      <div className="w-1/2 text-white text-[36px] font-semibold text-left ml-20">
         Trust • Security • Transparency
         <div className="text-[25px] text-left mt-6">
           Monitor, track, and secure your crypto with real-time alerts, wallet
@@ -529,8 +567,26 @@ const Home = () => {
               <span>English</span>
             </div>
           </div>
+          <div className="w-auto h-auto bg-gray-100">
+      {/* Circular Icon with Draggable */}
+      <Draggable nodeRef={draggableRef}>
+        <div
+          ref={draggableRef}
+          className="fixed top-4 left-4 w-auto h-auto p-2 bg-green-500/30 text-white flex items-center justify-center rounded-full shadow-lg backdrop-blur-lg border border-white cursor-pointer"
+          onDoubleClick={toggleModal}
+        >
+          <p> <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M120-120v-80l80-80v160h-80Zm160 0v-240l80-80v320h-80Zm160 0v-320l80 81v239h-80Zm160 0v-239l80-80v319h-80Zm160 0v-400l80-80v480h-80ZM120-327v-113l280-280 160 160 280-280v113L560-447 400-607 120-327Z"/></svg></p>
+          <p className="m-1"> Track Activities </p>
+
+        </div>
+      </Draggable>
+
+      {/* Modal Component */}
+      <Modal isOpen={isModalOpen} onClose={toggleModal} />
+    </div>
         </div>
       </footer>
+      
     </div>
   );
 };
