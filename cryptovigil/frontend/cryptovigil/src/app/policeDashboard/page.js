@@ -152,7 +152,7 @@ const OfficialsPage = () => {
         style={{
           backgroundColor: darkMode
             ? "rgba(0, 0, 0, 0.3)"
-            : "rgba(255,255,255 0.6)", // Light gray with transparency for dark mode, white with transparency for light mode
+            : "rgba(255,255,255 0.4)", // Light gray with transparency for dark mode, white with transparency for light mode
           // color: darkMode ? "white" : "black",
           backdropFilter: darkMode ? "blur(8px)" : "blur(4px)", // Dark mode gets a stronger blur, light mode a lighter blur
           border: darkMode
@@ -164,7 +164,7 @@ const OfficialsPage = () => {
         <div className="flex">
           <div className="flex-grow">
             {/* Search and Filters */}
-            <div className="flex justify-center mt-8 ml-4 mb-4">
+            <div className="flex justify-center mt-8 ml-4 mb-8">
               <input
                 type="text"
                 placeholder="Search for Features..."
@@ -184,8 +184,8 @@ const OfficialsPage = () => {
                   key={index}
                   className={`group p-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 ${
                     darkMode
-                      ? "bg-gradient-to-r from-green-800 via-gray-900 to-green-600"
-                      : "bg-gradient-to-r from-green-200 to-white"
+                      ? "bg-gradient-to-r from-green-800 via-gray-900 to-green-500"
+                      : "bg-gradient-to-r from-green-300 to-white"
                   }`}
                 >
                   <div className="flex justify-between items-center mb-4">
@@ -218,7 +218,7 @@ const OfficialsPage = () => {
 
           {/* Sidebar */}
           <div
-            className={`w-64 border-l mt-20 mr-4 border rounded-lg ${
+            className={`w-64 border-l mt-24 mr-4 border rounded-lg ${
               darkMode ? "border-gray-700" : "border-gray-300"
             } p-4 bg-opacity-90 ${
               darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
@@ -301,8 +301,58 @@ const OfficialsPage = () => {
             </div>
           </div>
           {/* side div 2 */}
-          <div className="mt-4 ml-72 border-4 border-t-pink-500 border-b-green-500 border-l-pink-500 border-r-green-500 rounded-lg">
-            <p>Features Of Global Transaction Tracking</p>
+          <div className="mt-4 ml-10 border-2 border-t-pink-500 border-b-green-500 border-l-pink-500 border-r-green-500 rounded-lg w-[50%]">
+            <p className="text-center text-xl">
+              Features Of Global Transaction Tracking
+            </p>
+            <div className="h-1/2 flex flex-col">
+              <div className="flex ">
+                <div className="w-full p-4 bg-transparent text-center">
+                  <div className="flex flex-row">
+                    <img
+                      src="/WalletInsights.png"
+                      alt="wallet"
+                      className="h-40 w-60"
+                    />
+                    <div className=" text-center mt-2 ">
+                      <p className="text-xl text-center">
+                        Complete Wallet Insights Includes
+                      </p>
+                      <ul>
+                        <li>Wallet ID - Wallet Balance</li>
+                        <li>Wallet Transactions</li>
+                        <li>Wallet Address</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            <div className="h-1/2 flex flex-col">
+              <div className="flex ">
+                <div className="w-full p-4 bg-transparent text-center">
+                  <div className="flex flex-row">
+                    <img
+                      src="/WalletInsights.png"
+                      alt="wallet"
+                      className="h-40 w-60"
+                    />
+                    <div className=" text-center mt-2 ">
+                      <p className="text-xl text-center">
+                        Complete Wallet Insights Includes
+                      </p>
+                      <ul>
+                        <li>Wallet ID - Wallet Balance</li>
+                        <li>Wallet Transactions</li>
+                        <li>Wallet Address</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
           </div>
         </div>
       </div>
