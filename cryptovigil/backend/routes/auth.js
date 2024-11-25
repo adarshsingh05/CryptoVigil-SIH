@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const VALIDIP = require('../models/user');
 const sendVerificationEmail = require('../utils/sendEmail');
 const router = express.Router();
 
@@ -119,6 +120,39 @@ router.get('/verify/:token', async (req, res) => {
     res.status(500).send('<h1>Invalid or expired token</h1>');
   }
 });
+
+router.post('/verifyip', async (req, res) => {
+  const { ip } = req.body; // Extract IP from request body
+  const allIPs = await VALIDIP.find({}, { ip: 1, _id: 0 });
+  console.log("Received IP:", ip);
+
+  try {
+    // Normalize input (trim spaces)
+    const trimmedIP = ip.trim();
+
+    // Find the IP in the database
+    const user = await VALIDIP.findOne({ ip: trimmedIP });
+
+    if (!user) {
+      console.log("Stored IPs in Database:", allIPs);
+      console.log("IP not found in database.");
+      return res.status(400).json({ msg: 'Invalid IP' });
+    }
+   
+    console.log("IP found in database:", user.ip);
+    return res.status(200).json({ msg: 'Valid IP' });
+    
+
+  } catch (error) {
+    console.error("Server Error:", error);
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
+
+
+
+
+
 
 
 // Login

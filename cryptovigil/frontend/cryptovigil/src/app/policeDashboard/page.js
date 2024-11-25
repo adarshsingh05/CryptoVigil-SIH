@@ -1,10 +1,21 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { Roboto } from "next/font/google";
+import styles from "../styles/GetInForm.module.css";
+import { useRouter } from "next/navigation";
 import { FaMoon, FaSun } from "react-icons/fa"; // Import icons for light/dark mode
 import { MdSearch } from "react-icons/md"; // Search icon
 import { FaArrowUp, FaArrowDown } from "react-icons/fa"; // Up and down arrows for price changes
 
+
+const roboto = Roboto({
+  weight: ["400", "700"], // Valid weights for the font
+  subsets: ["latin"], // Ensure you include the appropriate subset
+});
+
 const features = [
+  
+ 
   {
     title: "Monitor Global Transaction",
     description:
@@ -23,7 +34,12 @@ const features = [
       "Get the exact Location of the place from where the trasaction is initiated in form of latitude and longitude, easy to locate on map",
     status: "Investigated",
   },
-  { title: "Feature Y", description: "Lorem Ipsum", status: "Active" },
+  {
+    title: "Suspicious Transaction Alert",
+    description:
+      "Ge alert on the go on your mobile device, if any sucpisous wallet is detected with every single details",
+    status: "Active",
+  },
   {
     title: "Flag High-Risk Transactions",
     description:
@@ -42,7 +58,6 @@ const OfficialsPage = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [cryptoPrices, setCryptoPrices] = useState([]);
-
   const toggleDarkMode = () => setDarkMode((prevMode) => !prevMode);
 
   // Fetch cryptocurrency prices from Coinbase API in INR
@@ -110,8 +125,27 @@ const OfficialsPage = () => {
   const filteredFeatures = features.filter((feature) =>
     feature.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
+  let [userIP, setUserIP] = useState("");
+  // getting current IP
+useEffect(() => {
+  fetch('https://backend-ip.vercel.app/api/ip', {
+    method: 'GET',
+    credentials: 'include', 
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    userIP = data.ip;
+    setUserIP(data.ip);
+    console.log('IP Address:', data.ip);
+  })
+  .catch((error) => {
+    console.error('Error fetching IP:', error);
+  });
+}, []);
+const router = useRouter(); // Use useRouter from "next/navigation"
 
   return (
+    
     <div
       className={`min-h-screen ${
         darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"
@@ -178,7 +212,7 @@ const OfficialsPage = () => {
             </div>
 
             {/* Features Section */}
-            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl mx-auto">
+            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl mx-auto cursor-pointer">
               {filteredFeatures.map((feature, index) => (
                 <div
                   key={index}
@@ -187,6 +221,12 @@ const OfficialsPage = () => {
                       ? "bg-gradient-to-r from-green-800 via-gray-900 to-green-500"
                       : "bg-gradient-to-r from-green-300 to-white"
                   }`}
+
+                  onClick={() => {
+                    if (index === 0) {
+                      router.push("https://bc-lemon.vercel.app/#!1AJbsFZ64EpEfS5UAjAfcUG8pH8Jn3rn1F");  // Redirect to /google when clicking the first card
+                    }
+                  }}
                 >
                   <div className="flex justify-between items-center mb-4">
                     <h2
@@ -327,7 +367,6 @@ const OfficialsPage = () => {
                   </div>
                 </div>
               </div>
-              
             </div>
             <div className="h-1/2 flex flex-col">
               <div className="flex ">
@@ -351,11 +390,77 @@ const OfficialsPage = () => {
                   </div>
                 </div>
               </div>
-              
             </div>
           </div>
         </div>
       </div>
+
+      {/* other section */}
+      <div
+        className={` flex flex-col text-center mb-2 border-2 rounded-xl m-8 ${
+          darkMode ? "border-white" : "border-black"
+        }`}
+      >
+        <div className={`${roboto.className} text-3xl font-semibold`}>
+          <span
+            className={`material-icons m-2 mt-6 mb-3  ${
+              darkMode ? "text-white" : "text-black"
+            } `}
+          >
+            location_on
+          </span>
+          LOCATE WALLET ON MAP
+        </div>
+        <div className="relative w-full h-screen">
+  <div className="relative w-full h-screen">
+  <img
+    src="/HOME LOGIN.png"
+    alt="location"
+    className="h-full w-full object-cover"
+  />
+  <div className="absolute mt-40 mr-14 top-0 right-0 h-full w-1/3 p-2 ">
+  <div className="bg-transparent border border-1 border-white rounded-lg shadow-lg py-6">
+    <div className={styles.container}>
+    <h1 className={styles.title}>Wallet Location Tracer</h1>
+    <hr className="bg-green-700"></hr>
+      <form className={styles.form}>
+        <label className="text-left text-xl">Organization Code</label>
+        <input type="password" placeholder="ABC1234" className={styles.input} required />
+        <label  className="text-left text-xl">Validated IP</label>
+        <input type="password" placeholder="Fetching Your IP" className={styles.input} disabled readOnly required
+        value={userIP} />
+        <button type="submit" className={styles.trackButton}
+          onClick={() => {
+                   
+            router.push("Testing"); 
+          
+        }}>
+          TRACK
+        
+        </button>
+      </form>
+      
+    </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+      </div>
+      <h1 className={`ext-white text-4xl font-bold justify-center items-center ml-[40%] mb-5 mt-2 font-mono ${
+              darkMode ? "text-white" : "text-black"
+            } `}>Sucpisous Wallets</h1>
+
+      <div
+  className="relative bg-cover bg-center h-screen"
+  style={{ backgroundImage: "url('/Aksi.jpg')" }}
+>
+
+  <div className="absolute inset-0 bg-black bg-opacity-0 flex justify-center ">
+  </div>
+</div>
+
     </div>
   );
 };
