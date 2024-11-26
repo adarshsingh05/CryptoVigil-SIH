@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "../styles/GetInForm.module.css";
 
 const DemoPage = () => {
   // Mock data for rendering the table
@@ -26,9 +27,11 @@ const DemoPage = () => {
     >
           
       {/* Sidebar */}
-      <aside className="fixed top-0 left-0 h-[100%] mt-4  ml-24 w-52 bg-transparent">
-        <h1 className="text-2xl font-bold text-center py-4 mt-[87px]">City Activity</h1>
-        <nav className="flex flex-col">
+      <aside className="fixed top-0 left-0 h-[100%] mt-4  ml-10 w-52 bg-transparent">
+        <h1 className="text-2xl font-bold text-center py-4 mt-[87px]">
+          <span className={styles.glower}>City Activities</span>
+          </h1>
+        <nav className="flex flex-col ml-4">
           <a
             href="#"
             className="py-2 px-4 text-sm font-medium text-gray-300 hover:bg-blue-700"
@@ -58,31 +61,54 @@ const DemoPage = () => {
 
       {/* Main Content */}
       <main className="ml-80 p-8">
-        <h2 className="text-3xl font-bold text-center mb-4">
-          Wallet Database - <span className="text-blue-400">Informations</span>
+        <h2 className="text-3xl font-bold text-center mb-4 font-mono">
+          <span className={styles.glower}>Wallet Database -</span> <span className="text-blue-400">Informations</span>
         </h2>
         <div className="overflow-x-auto mt-14">
           <table className="w-full text-sm text-left text-gray-400">
-            <thead className="text-xs uppercase bg-blue-800 text-gray-300">
-              <tr>
-                <th className="px-4 py-2">Wallet ID</th>
-                <th className="px-4 py-2">Status</th>
-                <th className="px-4 py-2">Balance</th>
-                <th className="px-4 py-2">IP Address</th>
-                <th className="px-4 py-2">Last Transaction</th>
-                <th className="px-4 py-2">Locate</th>
-                <th className="px-4 py-2">Flag</th>
-              </tr>
+          <thead className="text-lg  uppercase bg-[#000F1F] text-gray-300 border-b border-white font-mono">
+          <tr>
+  <th className="px-4  relative">
+    Wallet ID
+    <span className="absolute ml-12 mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
+  </th>
+  <th className="px-4 py-2 relative">
+    Status
+    <span className="absolute ml-[180px] mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
+  </th>
+  <th className="px-4 py-2 relative">
+    Balance
+    <span className="absolute ml-[30px] mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
+  </th>
+  <th className="px-4 py-2 relative">
+    IP Address
+    <span className="absolute ml-[28px] mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
+  </th>
+  <th className="px-4 py-2 relative">
+    Last Transaction
+    <span className="absolute ml-[34px] mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
+  </th>
+  <th className="px-4 py-2 relative">
+    Locate
+    <span className="absolute ml-[32px] mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
+  </th>
+  <th className="px-4 py-2">Flag</th>
+</tr>
+
+              
             </thead>
+            
             <tbody>
+            {/*  */}
+            {/* <div className="h-1 w-full bg-white"></div> */}
               {data.map((item, index) => (
                 <tr
                   key={index}
-                  className="border-b border-gray-700 hover:bg-gray-800"
+                  className="border-b border-gray-700 hover:bg-gray-800 mb-2"
                 >
-                  <td className="px-4 py-2">{item.pasukan}</td>
-                  <td className="px-4 py-2">{item.penanggungJawab}</td>
-                  <td className="px-4 py-2">{item.personil}</td>
+                  <td className="px-4 py-2 text-white">{item.pasukan}</td>
+                  <td className="px-4 py-2 text-white">{item.penanggungJawab}</td>
+                  <td className="px-4 py-2 text-green-500">{item.personil}</td>
                   <td className="px-4 py-2 text-blue-400">{item.titikAksi}</td>
                   <td className="px-4 py-2">{item.tanggal}</td>
                   <td className="px-4 py-2">
@@ -91,17 +117,23 @@ const DemoPage = () => {
                     </button>
                   </td>
                   <td className="px-4 py-2">
-                    <button className="bg-blue-500 text-white py-1 px-2 rounded">
+                    <button className="bg-red-500 text-white py-1 px-2 rounded">
                       Mark
                     </button>
                   </td>
                 </tr>
+                
               ))}
+              
             </tbody>
+           
           </table>
+          
         </div>
-        <button className="fixed bottom-4 right-4 bg-green-500 text-white text-3xl p-4 rounded-full shadow-lg hover:bg-green-600">
-          +
+        <button className="fixed bottom-4 right-4 bg-blue-500 text-white text-3xl p-4  rounded-md shadow-lg hover:bg-blue-800">
+          <img 
+          className="h-5 w-5"
+          src="search.png"></img>
         </button>
       </main>
     </div>
