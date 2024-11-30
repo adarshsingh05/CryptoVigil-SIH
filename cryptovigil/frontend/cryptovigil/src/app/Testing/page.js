@@ -26,59 +26,76 @@ const DemoPage = () => {
     style={{ backgroundImage: "url('/physics.jpg')" }}
     >
           
-      {/* Sidebar */}
-      <aside className="fixed top-0 left-0 h-[100%] mt-4  ml-10 w-52 bg-transparent">
-        <h1 className="text-2xl font-bold text-center py-4 mt-[87px]">
-          <span className={styles.glower}>City Activities</span>
-          </h1>
-        <nav className="flex flex-col ml-4">
-          <a
-            href="#"
-            className="py-2 px-4 text-sm font-medium text-gray-300 hover:bg-blue-700"
-          >
-            Demo 11 April
-          </a>
-          <a
-            href="#"
-            className="py-2 px-4 text-sm font-medium text-gray-300 hover:bg-blue-700"
-          >
-            Penerbitan Mudik
-          </a>
-          <a
-            href="#"
-            className="py-2 px-4 text-sm font-medium text-gray-300 hover:bg-blue-700"
-          >
-            Pertahanan Lokal
-          </a>
-          <a
-            href="#"
-            className="py-2 px-4 text-sm font-medium text-gray-300 hover:bg-blue-700"
-          >
-            Penanggulangan Bencana
-          </a>
-        </nav>
-      </aside>
+     {/* Sidebar */}
+<aside className="fixed top-0 left-0 h-[100%] w-80 bg-transparent flex flex-col items-center">
+  {/* Title */}
+  <h1 className="text-2xl font-bold ml-16 mt-[130px]">
+    <span className={styles.glower}>Monitor City Activities</span>
+  </h1>
+
+  {/* Search Bar */}
+  <div className="w-[360px] px-4 mt-6 flex flex-row">
+    <input
+      type="text"
+      placeholder="Search for Cities..."
+      className="w-64 ml-16 py-2 px-3 text-sm text-gray-700 bg-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-white"
+    />
+    <button className="bg-green-600  rounded-md ml-3 p-2"> <img 
+          className="h-5 w-[35px] "
+          src="search.png"></img></button>
+  </div>
+
+  {/* Navigation Links */}
+  <nav className="flex flex-col mt-6 w-full px-4">
+    <a
+      href="#"
+      className="py-2 px-4 text-sm font-medium text-gray-300 hover:bg-blue-700 rounded-md text-center"
+    >
+      Demo 11 April
+    </a>
+    <a
+      href="#"
+      className="py-2 px-4 text-sm font-medium text-gray-300 hover:bg-blue-700 rounded-md text-center"
+    >
+      Penerbitan Mudik
+    </a>
+    <a
+      href="#"
+      className="py-2 px-4 text-sm font-medium text-gray-300 hover:bg-blue-700 rounded-md text-center"
+    >
+      Pertahanan Lokal
+    </a>
+    <a
+      href="#"
+      className="py-2 px-4 text-sm font-medium text-gray-300 hover:bg-blue-700 rounded-md text-center"
+    >
+      Penanggulangan Bencana
+    </a>
+  </nav>
+</aside>
+
 
       {/* Main Content */}
       <main className="ml-80 p-8">
         <h2 className="text-3xl font-bold text-center mb-4 font-mono">
           <span className={styles.glower}>Wallet Database -</span> <span className="text-blue-400">Informations</span>
         </h2>
-        <div className="overflow-x-auto mt-14">
+        <div className=" mt-14">
           <table className="w-full text-sm text-left text-gray-400">
           <thead className="text-lg  uppercase bg-[#000F1F] text-gray-300 border-b border-white font-mono">
           <tr>
   <th className="px-4  relative">
     Wallet ID
-    <span className="absolute ml-12 mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
+    <span className="absolute ml-16 mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
   </th>
-  <th className="px-4 py-2 relative">
-    Status
-    <span className="absolute ml-[180px] mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
-  </th>
+  <th className="px-9 py-2 ml-16 relative">
+ <span className=" ml-14">Status</span> 
+  <span className="absolute left-[280px] mb-[2px] h-[32px] w-[1px] bg-gray-300"></span>
+</th>
+
   <th className="px-4 py-2 relative">
     Balance
-    <span className="absolute ml-[30px] mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
+    <span className="absolute ml-[28px] mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
   </th>
   <th className="px-4 py-2 relative">
     IP Address

@@ -340,6 +340,8 @@ const router = useRouter(); // Use useRouter from "next/navigation"
               </p>
             </div>
           </div>
+
+          {/* ANCHAL EDIT SECTION START */}
           {/* side div 2 */}
           <div className="mt-4 ml-10 border-2 border-t-pink-500 border-b-green-500 border-l-pink-500 border-r-green-500 rounded-lg w-[50%]">
             <p className="text-center text-xl">
@@ -392,6 +394,8 @@ const router = useRouter(); // Use useRouter from "next/navigation"
               </div>
             </div>
           </div>
+
+          {/* ANCHAL eDIT SECTION ENDS */}
         </div>
       </div>
 
