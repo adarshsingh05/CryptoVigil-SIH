@@ -1,7 +1,12 @@
+"use client"
 import React from "react";
 import styles from "../styles/GetInForm.module.css";
+import { useEffect, useState } from "react";
 
 const DemoPage = () => {
+  const [datas, setDatas] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   // Mock data for rendering the table
   const data = [
     {
@@ -20,6 +25,25 @@ const DemoPage = () => {
     },
     // Add more data here
   ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/transactions"); // Update the URL based on your backend setup
+        if (!response.ok) {
+          console.log("Failed to fetch data");
+        }
+        const result = await response.json();
+        console.log(result);
+        setDatas(result);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white"
@@ -85,12 +109,12 @@ const DemoPage = () => {
           <thead className="text-lg  uppercase bg-[#000F1F] text-gray-300 border-b border-white font-mono">
           <tr>
   <th className="px-4  relative">
-    Wallet ID
-    <span className="absolute ml-16 mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
+    From Wallet
+    <span className="absolute ml-12 mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
   </th>
-  <th className="px-9 py-2 ml-16 relative">
- <span className=" ml-14">Status</span> 
-  <span className="absolute left-[280px] mb-[2px] h-[32px] w-[1px] bg-gray-300"></span>
+  <th className="px-2 py-2 ml-16 relative">
+ <span className=" ml-2">To Wallet</span> 
+  <span className="absolute left-[170px] mb-[2px] h-[32px] w-[1px] bg-gray-300"></span>
 </th>
 
   <th className="px-4 py-2 relative">
@@ -98,18 +122,24 @@ const DemoPage = () => {
     <span className="absolute ml-[28px] mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
   </th>
   <th className="px-4 py-2 relative">
-    IP Address
+    Status
     <span className="absolute ml-[28px] mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
   </th>
+ 
   <th className="px-4 py-2 relative">
-    Last Transaction
-    <span className="absolute ml-[34px] mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
-  </th>
-  <th className="px-4 py-2 relative">
-    Locate
+    Gas Used
     <span className="absolute ml-[32px] mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
   </th>
-  <th className="px-4 py-2">Flag</th>
+  <th className="px-4 py-2">Block Hash
+  <span className="absolute ml-[22px]  h-[32px] w-[1px] bg-gray-300"></span>
+
+
+  </th>
+
+  <th className="px-1 py-2">Time And Date
+  <span className="absolute ml-[22px]  h-[32px] w-[1px] bg-gray-300"></span>
+  </th>
+
 </tr>
 
               
@@ -118,25 +148,24 @@ const DemoPage = () => {
             <tbody>
             {/*  */}
             {/* <div className="h-1 w-full bg-white"></div> */}
-              {data.map((item, index) => (
+              {datas.map((item, index) => (
                 <tr
                   key={index}
                   className="border-b border-gray-700 hover:bg-gray-800 mb-2"
                 >
-                  <td className="px-4 py-2 text-white">{item.pasukan}</td>
-                  <td className="px-4 py-2 text-white">{item.penanggungJawab}</td>
-                  <td className="px-4 py-2 text-green-500">{item.personil}</td>
-                  <td className="px-4 py-2 text-blue-400">{item.titikAksi}</td>
-                  <td className="px-4 py-2">{item.tanggal}</td>
+                  <td className="px-4 py-2 ml-1 text-white">  {item.from.length > 16 ? item.from.slice(0, 16) + '...' : item.from}</td>
+                  <td className="px-4 py-2 ml-[32px] text-white">{item.to.length > 16 ? item.to.slice(0, 16) + '...' : item.to}</td>
+                  <td className="px-4 py-2 text-green-500">{item.value}</td>
+                  <td className="px-4 py-2 text-blue-400">{item.status}</td>
+                  <td className="px-4 py-2">{item.gasUsed}</td>
                   <td className="px-4 py-2">
-                    <button className="bg-blue-500 text-white py-1 px-2 rounded">
-                      Trace
-                    </button>
+                  <td className="px-4 py-2 text-blue-400">{item.blockHash.length > 7 ? item.from.slice(0, 7) + '...' : item.blockHash}</td>
+
                   </td>
                   <td className="px-4 py-2">
-                    <button className="bg-red-500 text-white py-1 px-2 rounded">
-                      Mark
-                    </button>
+                  <td className=" py-2 text-blue-400"> {new Date(item.timestamp).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })} - 
+                  {new Date(item.timestamp).toLocaleDateString('en-GB')}</td>
+
                   </td>
                 </tr>
                 
