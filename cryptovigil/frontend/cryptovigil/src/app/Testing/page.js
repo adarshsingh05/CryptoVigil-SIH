@@ -69,16 +69,18 @@ const DemoPage = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="ml-[269px] p-8">
+      <main className="ml-[254px] p-8">
+        
         <h2 className="text-3xl font-bold text-center mt-[-20px] font-mono">
           <span className={styles.glower}>Wallet Database -</span>{" "}
           <span className="text-blue-400">Informations</span>
         </h2>
-        <div className=" mt-[33px] ml-[-20px]">
+        <div className="overflow-y-auto  h-[626px]"> {/* Add height here */}
+                  <div className=" mt-[33px] ml-[-20px]">
           <table className="w-[1212px] text-sm text-left text-gray-400">
             <thead className="text-lg uppercase bg-[#000F1F] text-gray-300 border-b border-white font-mono rounded-lg">
               <tr>
-                <th className="px-4 relative">
+                <th className="px-6 relative">
                   From Wallet
                   <span className="absolute ml-12 mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
                 </th>
@@ -87,10 +89,10 @@ const DemoPage = () => {
                   <span className="absolute left-[170px] mb-[2px] h-[32px] w-[1px] bg-gray-300"></span>
                 </th>
                 <th className="px-2 py-2 relative">
-                  <span className="ml-[15px]">amount transferred</span>
+                  <span className="ml-[28px]">amount transferred</span>
                   <span className="absolute ml-[28px] mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
                 </th>
-                <th className="px-4 py-2 relative">
+                <th className="px-4 -ml-7] py-2 relative">
                   Status
                   <span className="absolute ml-[28px] mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
                 </th>
@@ -98,7 +100,11 @@ const DemoPage = () => {
                   Gas Used
                   <span className="absolute ml-[32px] mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
                 </th>
-                <th className="px-4 py-2">Block Hash</th>
+                <th className="px-4 py-2 relative">Block Hash
+                <span className="absolute ml-[30px] mb-[2px]  h-[32px] w-[1px] bg-gray-300"></span>
+                
+                </th>
+
                 <th className="px-1 py-2">Time And Date</th>
               </tr>
             </thead>
@@ -110,7 +116,7 @@ const DemoPage = () => {
                   className="border-b border-gray-700 hover:bg-gray-800 mb-2 cursor-pointer"
                   onClick={() => setSelectedRow(item)} // Set selected row data on click
                 >
-                  <td className="px-4 py-2 ml-1 text-white">
+                  <td className="px-6 py-2 ml-1 text-white">
                     {item.from.length > 16
                       ? item.from.slice(0, 16) + "..."
                       : item.from}
@@ -140,6 +146,7 @@ const DemoPage = () => {
               ))}
             </tbody>
           </table>
+        </div>
         </div>
         <button className="fixed bottom-[38px] right-[53px] bg-blue-500 text-white text-3xl p-4  rounded-md shadow-lg hover:bg-blue-800">
           <img className="h-5 w-5" src="search.png" alt="Search"></img>
