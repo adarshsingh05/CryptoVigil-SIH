@@ -10,6 +10,10 @@
   src: url('fonts/GiantRobots-BWZan.ttf') format('ttf');
  
 }
+@font-face {
+  font-family: 'Emilio';
+  src: url('fonts/Whisper/Whisper-Regular.ttf') format('ttf');
+}
 :root {
   --font-ropa-sans: 'Ropa Sans', sans-serif;
 }

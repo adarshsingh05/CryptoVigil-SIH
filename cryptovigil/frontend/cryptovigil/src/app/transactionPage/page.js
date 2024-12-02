@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import { JsonRpcProvider, Wallet, formatUnits, parseUnits } from "ethers";
 import Link from "next/link";
 
@@ -17,9 +18,11 @@ export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       if (!privateKey || !walletId) {
         setError("Please provide both wallet ID (address) and private key.");
@@ -37,7 +40,7 @@ export default function Home() {
         );
         return;
       }
-
+      setIsLoading(false);
       setProvider(newProvider);
       setWallet(newWallet);
       setError("");
@@ -307,127 +310,107 @@ export default function Home() {
           </div>
         </div>
 
-        {showModal && receipt && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-            <div className="bg-white rounded-lg shadow-lg p-6 w-auto relative">
-              {/* Cross button */}
-              <div
-                onClick={() => setShowModal(false)}
-                className="absolute top-2 right-2 text-xl cursor-pointer text-gray-200 hover:text-white"
-              >
-                &times; {/* Or use an SVG icon */}
-              </div>
+        {showModal2 && (
+  <div className="text-center fixed flex flex-col inset-0 z-50 items-center border-2 border-white bg-black bg-opacity-90 backdrop-blur-sm h-4/6 w-[650px] ml-[400px] mt-[120px] rounded-2xl">
+    <div className="flex flex-row">
+      <img src="BitcoinPrivate.svg" className="h-14 w-14 mt-5 mr-4 mb-1 mx-auto" alt="Crypto Wallet Logo" />
+      <h1 className="text-center text-blue-400 text-3xl mt-6 mb-6 font-Emilio">
+        Welcome to Your Crypto-Wallet
+      </h1>
+    </div>
+    {!wallet ? (
+      <div className="font-mono text-[#ec58d6]">
+        Please Log In to proceed with transactions or other wallet details!
+      </div>
+    ) : (
+      <div className="flex flex-col mb-2">
+        <p className="font-mono text-[#ec58d6]">You are logged in to your wallet Successfully!</p>
+      </div>
+    )}
 
-              <img
-                src="accept 1.png"
-                alt="Success"
-                className="h-14 w-14 mx-auto"
-              />
-              <h2 className="text-2xl  text-center font-extrabold text-green-600 mb-4 mt-2">
-                Transaction Successful
-              </h2>
-              <div className="text-md text-gray-700 border-green-600 border-2 p-4 rounded-lg">
-                <h3 className="text-xl text-center border-b-2 border-b-green-500 mb-6">
-                  Transaction Details
-                </h3>
-                <p>
-                  <strong>Sender:</strong> {receipt.sender}
-                </p>
-                <p>
-                  <strong>Recipient:</strong> {receipt.recipient}
-                </p>
-                <p>
-                  <strong>Block Hash:</strong> {receipt.blockHash}
-                </p>
-                <p>
-                  <strong>Amount:</strong> {receipt.amount} ETH
-                </p>
-                <p>
-                  <strong>Gas Used:</strong> {receipt.gasUsed}
-                </p>
-                <p>
-                  <strong>Time:</strong> {receipt.timestamp}
-                </p>
-              </div>
-            </div>
+    {/* Close Button */}
+    <button
+      onClick={() => setShowModal2(false)}
+      className="absolute top-2 right-2 text-gray-500 hover:text-white"
+    >
+      ✕
+    </button>
+
+    {!wallet ? (
+      // Form to open the wallet
+      <form className="flex flex-col" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Wallet ID"
+          value={walletId}
+          onChange={(e) => setWalletId(e.target.value)}
+          required
+          className="mb-8 p-2 border w-[600px] border-gray-300 rounded mt-4"
+        />
+        <input
+          type="password"
+          placeholder="Private Key"
+          value={privateKey}
+          onChange={(e) => setPrivateKey(e.target.value)}
+          required
+          className="mb-8 p-2 border border-gray-300 rounded"
+        />
+
+        {isLoading ? (
+          <div className="flex items-center justify-center mb-4">
+            <div className="loader border-t-4 border-b-4 border-blue-500 rounded-full w-8 h-8 animate-spin"></div>
           </div>
-        )}{showModal2 && (
-          <div className="text-center fixed flex flex-col inset-0 z-50  items-center  bg-black bg-opacity-90 backdrop-blur-sm h-[350px] w-[650px] ml-[400px] mt-[200px] rounded-2xl">
-            <h1 className="text-center text-blue-400 text-3xl mt-6 mb-6"> Welcome to Your Crypto-Wallet</h1>
-            <p className="font-mono text-[#ec58d6]">Please Log In to proceed for transactions or other wallet details !</p>
-             {/* Close Button */}
-      <button
-        onClick={() => setShowModal2(false)}
-        className="absolute top-2 right-2 text-gray-500 hover:text-white"
-      >
-        ✕
-      </button>
-            {!wallet ? (
-              // Form to open the wallet
-              <form className="flex flex-col" onSubmit={handleSubmit}>
-                <input
-                  type="text"
-                  placeholder="Wallet ID"
-                  value={walletId}
-                  onChange={(e) => setWalletId(e.target.value)}
-                  required
-                  className="mb-8 p-2 border w-[600px] border-gray-300 rounded mt-4 "
-                />
-                <input
-                  type="password"
-                  placeholder="Private Key"
-                  value={privateKey}
-                  onChange={(e) => setPrivateKey(e.target.value)}
-                  required
-                  className="mb-8 p-2 border border-gray-300 rounded"
-                />
-                <button
-                  type="submit"
-                  className="bg-blue-500 text-white px-4 py-2 rounded "
-                >
-                  Open Wallet
-                </button>
-              </form>
-            ) : (
-              // Display wallet information and transaction form
-              <>
-                <div className="mb-4">
-                  <p>Wallet Address: {wallet.address}</p>
-                  <p>Balance: {balance} ETH</p>
-                </div>
-                <form onSubmit={handleTransaction}>
-                  <input
-                    type="text"
-                    placeholder="Recipient Address"
-                    value={receiver}
-                    onChange={(e) => setReceiver(e.target.value)}
-                    required
-                    className="mb-2 p-2 border border-gray-300 rounded"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Amount in ETH"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    required
-                    className="mb-2 p-2 border border-gray-300 rounded"
-                  />
-                  <button
-                    type="submit"
-                    className="bg-green-500 text-white px-4 py-2 rounded"
-                   
-                  >
-                    Send Ether
-                  </button>
-                </form>
-              </>
-            )}
-        
-            {/* Error message */}
-            {error && <p className="text-danger mt-2">{error}</p>}
-          </div>
-          
+        ) : (
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+          >
+            Open Wallet
+          </button>
         )}
+      </form>
+    ) : (
+      // Display wallet information and transaction form
+      <>
+        <div className="mb-4 text-white">
+          <p><span className="text-green-500">Wallet Address:</span> {wallet.address}</p>
+          <p className="text-left"><span className="text-green-500">Balance:</span> {balance} ETH</p>
+        </div>
+        <p className="text-white mb-2 font-mono text-lg">Transfer Crypto Module</p>
+        <form className="flex flex-col" onSubmit={handleTransaction}>
+          <span className="text-white text-left">To (Public Address)</span>
+          <input
+            type="text"
+            placeholder="Recipient Address"
+            value={receiver}
+            onChange={(e) => setReceiver(e.target.value)}
+            required
+            className="mb-2 p-2 border border-gray-300 rounded"
+          />
+          <span className="text-white text-left">Amount (in ETH)</span>
+          <input
+            type="text"
+            placeholder="Amount in ETH"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            required
+            className="mb-2 p-2 w-[500px] border border-gray-300 rounded"
+          />
+          <button
+            type="submit"
+            className="bg-green-500 text-white px-4 py-2 mt-4 rounded"
+          >
+            Send Ether
+          </button>
+        </form>
+      </>
+    )}
+
+    {/* Error message */}
+    {error && <p className="text-red-500 mt-2">{error}</p>}
+  </div>
+)}
+
         
    </div>
    </>

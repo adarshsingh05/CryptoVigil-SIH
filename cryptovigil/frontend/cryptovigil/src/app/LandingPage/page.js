@@ -117,13 +117,16 @@ const Home = () => {
             href="/"
             className="text-white border-2 border-transparent hover:text-green-500 hover:border-green-500 hover:rounded-full py-2 px-4 transition-all duration-300"
           >
-            HOME
+            <span >HOME
+            </span>
+            <div className="w-[51px] h-[1.7px] bg-green-500"></div>
+
           </Link>
           <Link
-            href="/explore"
+            href="/transactionPage"
             className="text-white border-2 border-transparent hover:text-green-500 hover:border-green-500 hover:rounded-full py-2 px-4 transition-all duration-300"
           >
-            EXPLORE
+            MAKE TRANSACTIONS
           </Link>
 
           {/* Conditionally render Login/Sign Up or Dashboard */}
