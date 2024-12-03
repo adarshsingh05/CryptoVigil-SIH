@@ -16,7 +16,7 @@ export default function Login() {
      
       setIsLoggedIn(true); // Set loading to true when login is successful
       setTimeout(() => {
-        router.push("/LandingPage"); // Redirect to LandingPage after 5 seconds
+        router.push("/"); // 
       }, 5000); // 5 seconds delay
     }
   }, [isLoggedIn, router]);

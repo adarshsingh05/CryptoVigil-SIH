@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import LoaderModal from "../components/loader";
 
 import { JsonRpcProvider, Wallet, formatUnits, parseUnits } from "ethers";
 import Link from "next/link";
@@ -19,6 +20,8 @@ export default function Home() {
   const [showModal2, setShowModal2] = useState(false);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const[isloadingtwo,setIsLoadingTwo] = useState(false);
+  const [ip, setIp] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,6 +51,23 @@ export default function Home() {
       setError("Invalid private key or address.");
     }
   };
+  let [userIP, setUserIP] = useState("");
+  // getting current IP
+  useEffect(() => {
+    fetch("https://backend-ip.vercel.app/api/ip", {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        userIP = data.ip;
+        setUserIP(data.ip);
+        console.log("IP Address:", data.ip);
+      })
+      .catch((error) => {
+        console.error("Error fetching IP:", error);
+      });
+  }, []);
 
   useEffect(() => {
     const fetchBalance = async () => {
@@ -88,24 +108,30 @@ export default function Home() {
         setError("Please provide a valid receiver address and amount.");
         return;
       }
-
+  
       if (!wallet) {
         setError("Please open your wallet first.");
         return;
       }
-
+  
+      if (!userIP) {
+        setError("Unable to fetch your IP address. Please try again.");
+        return;
+      }
+      setIsLoadingTwo(true);
+  
       const parsedAmount = parseUnits(amount, 18); // Convert ETH to wei
       const tx = await wallet.sendTransaction({
         to: receiver,
         value: parsedAmount,
       });
-
+  
       setTxHash(tx.hash); // Set transaction hash
       setError("");
-
+  
       // Wait for the transaction to be mined and get the receipt
       const receipt = await tx.wait(); // Wait for transaction confirmation
-
+  
       // Prepare transaction data for backend
       const transactionData = {
         txHash: receipt.transactionHash,
@@ -119,9 +145,10 @@ export default function Home() {
           : null,
         blockHash: receipt.blockHash,
         blockNumber: receipt.blockNumber,
+        ip: userIP, // Include IP address
         timestamp: new Date().toISOString(),
       };
-
+  
       // Send transaction data to the backend
       const response = await fetch("http://localhost:5000/api/transactions", {
         method: "POST",
@@ -130,20 +157,24 @@ export default function Home() {
         },
         body: JSON.stringify(transactionData),
       });
-
+  
       if (!response.ok) {
         const { message } = await response.json();
         throw new Error(message || "Failed to save transaction to the server.");
-      }
+      }      setIsLoadingTwo(false);
 
+  
       console.log("Transaction saved to the backend successfully.");
       setReceipt(transactionData); // Set the receipt state to show in the modal
       setShowModal(true); // Show the modal
       setError("");
+      console.log("model already triggeres");
     } catch (err) {
+      console.error("Transaction failed:", err);
       setError("Transaction failed: " + err.message);
     }
   };
+  
 
   return (
     <>
@@ -396,18 +427,69 @@ export default function Home() {
             required
             className="mb-2 p-2 w-[500px] border border-gray-300 rounded"
           />
+          {/* for IP */}
+         
           <button
             type="submit"
             className="bg-green-500 text-white px-4 py-2 mt-4 rounded"
           >
             Send Ether
           </button>
+          <LoaderModal isLoading={isloadingtwo} message="Transaction in progress, please wait..." />
         </form>
       </>
     )}
 
     {/* Error message */}
     {error && <p className="text-red-500 mt-2">{error}</p>}
+    {showModal && receipt && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+            <div className="bg-white rounded-lg shadow-lg p-6 w-auto relative">
+              {/* Cross button */}
+              <div
+                onClick={() => setShowModal(false)}
+                className="absolute top-2 right-2 text-xl cursor-pointer text-gray-200 hover:text-white"
+              >
+                &times; {/* Or use an SVG icon */}
+              </div>
+
+              <img
+                src="accept 1.png"
+                alt="Success"
+                className="h-14 w-14 mx-auto"
+              />
+              <h2 className="text-2xl  text-center font-extrabold text-green-600 mb-4 mt-2">
+                Transaction Successful
+              </h2>
+              <div className="text-md text-gray-700 border-green-600 border-2 p-4 rounded-lg">
+                <h3 className="text-xl text-center border-b-2 border-b-green-500 mb-6">
+                  Transaction Details
+                </h3>
+                <p>
+                  <strong>Sender:</strong> {receipt.from}
+                </p>
+                <p>
+                  <strong>Recipient:</strong> {receipt.to}
+                </p>
+                <p>
+                  <strong>Block Hash:</strong> {receipt.blockHash}
+                </p>
+                <p>
+                  <strong>Amount:</strong> {receipt.value} ETH
+                </p>
+                <p>
+                  <strong>Status:</strong> {receipt.status} ETH
+                </p>
+                <p>
+                  <strong>Gas Used:</strong> {receipt.gasUsed}
+                </p>
+                <p>
+                  <strong>Time:</strong> {receipt.timestamp}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
   </div>
 )}
 
