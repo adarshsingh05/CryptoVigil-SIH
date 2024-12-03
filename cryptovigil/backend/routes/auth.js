@@ -2,7 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const VALIDIP = require('../models/user');
+const VALIDIP = require('../models/Ip');
 const sendVerificationEmail = require('../utils/sendEmail');
 const router = express.Router();
 

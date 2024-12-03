@@ -113,17 +113,16 @@ const Home = () => {
       {/* Navbar */}
       <header className="relative z-10 p-6 flex justify-center items-center">
         <nav className="flex space-x-8 font-[var(--font-ropa-sans)]">
-          <Link
-            href="/"
-            className="text-white border-2 border-transparent hover:text-green-500 hover:border-green-500 hover:rounded-full py-2 px-4 transition-all duration-300"
-          >
-            <span >HOME
-            </span>
-            <div className="w-[51px] h-[1.7px] bg-green-500"></div>
+        <Link
+  href={user ? '/' : '/Login'}
+  className="text-white border-2 border-transparent hover:text-green-500 hover:border-green-500 hover:rounded-full py-2 px-4 transition-all duration-300"
+>
+  <span>HOME</span>
+  <div className="w-[51px] h-[1.7px] bg-green-500"></div>
+</Link>
 
-          </Link>
           <Link
-            href="/transactionPage"
+            href={user ? '/transactionPage' : '/Login'}
             className="text-white border-2 border-transparent hover:text-green-500 hover:border-green-500 hover:rounded-full py-2 px-4 transition-all duration-300"
           >
             MAKE TRANSACTIONS
@@ -132,7 +131,7 @@ const Home = () => {
           {/* Conditionally render Login/Sign Up or Dashboard */}
 
           <Link
-            href="/profile"
+            href={user ? '/profile' : '/Login'}
             className="text-white border-2 border-transparent hover:text-green-500 hover:border-green-500 hover:rounded-full py-2 px-4 transition-all duration-300"
           >
             PROFILE
