@@ -131,7 +131,7 @@ const Home = () => {
           {/* Conditionally render Login/Sign Up or Dashboard */}
 
           <Link
-            href={user ? '/profile' : '/Login'}
+            href={user ? '/UserDashBoard' : '/Login'}
             className="text-white border-2 border-transparent hover:text-green-500 hover:border-green-500 hover:rounded-full py-2 px-4 transition-all duration-300"
           >
             PROFILE
