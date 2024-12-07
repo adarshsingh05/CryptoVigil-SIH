@@ -1,5 +1,13 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { MdDone } from "react-icons/md";
+
+
+import { Ropa_Sans } from "next/font/google";
+const ropaSans = Ropa_Sans({
+  weight: "400", 
+  subsets: ["latin"], 
+});
 
 const Modal = ({ isOpen, onClose }) => {
   const code = "1234";
@@ -125,15 +133,18 @@ const Modal = ({ isOpen, onClose }) => {
     textAlign: "center",
     fontSize: "24px",
     marginTop: "10px",
-    color: "black",
+    color: "#63D134",
+    fontFamily: "'Ropa Sans', sans-serif",
+   
+
+    
   }}
 >
-  <p className="bg-gray-400 text-2xl font-semibold"
+  <p className="bg-black w-[61%] text-[30px]"
     style={{
       display: "inline-block", // Ensures the background wraps tightly around the text
-       // Black background
-      padding: "5px 10px", // Add a small padding for aesthetics
-      borderRadius: "4px", // Optional: Rounded corners
+      borderRadius: "10px", // Optional: Rounded corners
+      padding: "5px",
     }}
   >
     Transaction Tracking (Law Enforcement)
@@ -159,12 +170,14 @@ const Modal = ({ isOpen, onClose }) => {
                 textAlign: "center",
                 fontSize: "20px",
                 margin: "20px 0",
+                fontFamily: "'Ropa Sans', sans-serif",
+
               }}
             >
               Verify Your Identity To Proceed
             </div>
             <div style={{ marginTop: "20px", display: "flex", flexDirection: "column", alignItems: "center" }}>
-              <div style={{ position: "relative", width: "100%", maxWidth: "400px" }}>
+              <div style={{ position: "relative", width: "100%", maxWidth: "700px" }}>
                 <input
                   type="password"
                   id="codeInput"
@@ -173,7 +186,7 @@ const Modal = ({ isOpen, onClose }) => {
                     width: "100%",
                     padding: "10px",
                     border: "1px solid #D1D5DB",
-                    borderRadius: "5px",
+                    borderRadius: "10px",
                     outline: "none",
                     color: "black",
                   }}
@@ -184,32 +197,39 @@ const Modal = ({ isOpen, onClose }) => {
                   type="button"
                   style={{
                     position: "absolute",
-                    top: "0",
-                    right: "0",
+                    right: "0px",
+                    top: "50%",
+                    height: "85%",
+                    width: "7%",
+                    transform: "translateY(-61%)",
                     padding: "10px",
-                    backgroundColor: "#6B7280",
+                    backgroundColor: "black",
                     color: "black",
-                    borderRadius: "0 5px 5px 0",
+                    borderRadius: "0 8px 8px 0",
                     border: "none",
                     cursor: "pointer",
+                                ///grey eye 
                   }}
                   onClick={() => {
                     const input = document.getElementById("codeInput");
                     input.type = input.type === "password" ? "text" : "password";
                   }}
                 >
-                  👁️
+                  <MdDone style={{ color: 'white', fontSize: '25px' }} />
                 </button>
               </div>
               <button
                 style={{
                   marginTop: "20px",
-                  padding: "10px 20px",
-                  backgroundColor: "#34D399",
+                  padding: "7px",
+                  backgroundColor: "#63D134",
                   color: "white",
-                  borderRadius: "5px",
+                  borderRadius: "8px",
                   cursor: "pointer",
-                  border: "none",
+                  border: "none",         //submitb
+                  width:"20%",
+                  fontFamily: "'Ropa Sans', sans-serif",
+                  fontSize: "16px",
                 }}
                 onClick={() => {
                   const input = document.getElementById("codeInput");
