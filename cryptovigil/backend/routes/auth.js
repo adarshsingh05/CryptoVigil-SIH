@@ -5,6 +5,120 @@ const User = require('../models/user');
 const VALIDIP = require('../models/Ip');
 const sendVerificationEmail = require('../utils/sendEmail');
 const router = express.Router();
+const crypto = require('crypto');
+
+
+// Encryption setup
+const algorithm = 'aes-256-cbc';
+const encryptionKey = crypto.randomBytes(32); // Replace this with a secure, fixed key
+const iv = crypto.randomBytes(16); // Replace this with a secure, fixed IV
+
+// Encrypt function
+const encrypt = (text) => {
+  if (!text) {
+    throw new Error('Text to encrypt is undefined or null');
+  }
+  const cipher = crypto.createCipheriv(algorithm, encryptionKey, iv);
+  let encrypted = cipher.update(text, 'utf8', 'hex');
+  encrypted += cipher.final('hex');
+  return {
+    encryptedData: encrypted,
+    iv: iv.toString('hex'),
+  };
+};
+
+// Decrypt function
+const decrypt = (encryptedData, iv) => {
+  const decipher = crypto.createDecipheriv(
+    algorithm,
+    encryptionKey,
+    Buffer.from(iv, 'hex')
+  );
+  let decrypted = decipher.update(encryptedData, 'hex', 'utf8');
+  decrypted += decipher.final('utf8');
+  return decrypted;
+};
+
+// Registration route
+router.post('/register', async (req, res) => {
+  const { username, email, password, aadhaarId } = req.body;
+
+  if (!aadhaarId) {
+    return res.status(400).json({ msg: 'Aadhaar ID is required.' });
+  }
+
+  try {
+    // Check if the user already exists
+    let user = await User.findOne({ email });
+    if (user) {
+      return res.status(400).json({ msg: 'User already exists' });
+    }
+
+    // Hash the password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Encrypt Aadhaar ID
+    const encryptedAadhaar = encrypt(aadhaarId);
+
+    // Create new user
+    user = new User({
+      username,
+      email,
+      password: hashedPassword,
+      aadhaar: encryptedAadhaar.encryptedData,
+      iv: encryptedAadhaar.iv,
+    });
+      // Create verification token
+      const verificationToken = jwt.sign(
+        { userId: user._id },
+        process.env.JWT_SECRET,
+        { expiresIn: '1h' }
+      );
+
+    // Save user to database
+    await user.save();
+
+  
+    user.verificationToken = verificationToken;
+    await user.save();
+
+    // Send verification email
+    sendVerificationEmail(user.email, verificationToken);
+
+    res.status(200).json({ msg: 'Registration successful. Please verify your email.' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
+
+// View Aadhaar route
+router.get('/view-aadhaar/:userId', async (req, res) => {
+  const { userId } = req.params;
+  const { passkey } = req.query;
+
+  if (!passkey || passkey !== process.env.SECURE_PASSKEY) {
+    return res.status(403).json({ msg: 'Invalid or missing passkey' });
+  }
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ msg: 'User not found' });
+    }
+
+    // Decrypt Aadhaar ID
+    const decryptedAadhaar = decrypt(user.aadhaar, user.iv);
+
+    res.status(200).json({ aadhaarId: decryptedAadhaar });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
+
+
 
 
 
@@ -54,41 +168,7 @@ router.get('/user', verifyToken, async (req, res) => {
 });
 
 
-// Registration
-router.post('/register', async (req, res) => {
-  const {username, email, password } = req.body;
-  try {
-    let user = await User.findOne({ email });
-    if (user) {
-      return res.status(400).json({ msg: 'User already exists' });
-    }
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
-    user = new User({
-      username,
-      email,
-      password: hashedPassword,
-    });
-
-    // Save user to DB
-    await user.save();
-
-    // Create verification token
-    const verificationToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    user.verificationToken = verificationToken;
-    await user.save();
-
-    // Send email
-    sendVerificationEmail(user.email, verificationToken);
-
-    res.status(200).json({ msg: 'Registration successful. Please verify your email.' });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ msg: 'Server error' });
-  }
-});
 
 // Email verification
 // Email verification
@@ -98,6 +178,8 @@ router.get('/verify/:token', async (req, res) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.userId);
+   console.log(user)
+
 
     if (!user) {
       return res.status(404).send('<h1>User not found</h1>');
@@ -161,6 +243,7 @@ router.post('/login', async (req, res) => {
   try {
     
     const user = await User.findOne({ email });
+    console.log(user)
     if (!user) {
       return res.status(400).json({ msg: 'Invalid credentials' });
     }

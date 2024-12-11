@@ -197,7 +197,7 @@ const Modal = ({ isOpen, onClose }) => {
                   type="button"
                   style={{
                     position: "absolute",
-                    right: "0px",
+                    right: "-1px",
                     top: "50%",
                     height: "85%",
                     width: "7%",
@@ -209,13 +209,15 @@ const Modal = ({ isOpen, onClose }) => {
                     border: "none",
                     cursor: "pointer",
                                 ///grey eye 
+                                backgroundImage: "url('/eye.png')",
                   }}
                   onClick={() => {
                     const input = document.getElementById("codeInput");
                     input.type = input.type === "password" ? "text" : "password";
                   }}
                 >
-                  <MdDone style={{ color: 'white', fontSize: '25px' }} />
+                 <img src="/eye.jpg" alt="eye" 
+                 className="mr-8"/> 
                 </button>
               </div>
               <button

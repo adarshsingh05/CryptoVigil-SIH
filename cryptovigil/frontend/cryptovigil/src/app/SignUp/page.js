@@ -8,6 +8,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const[aadhaarId, setAadhaarId] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [progress, setProgress] = useState(0); // For loading bar
@@ -38,7 +39,7 @@ const Signup = () => {
           username: username,
           email: email,
           password: password,
-        }),
+          aadhaarId: aadhaarId,       }),
       });
 
       setProgress(70); // Update loading bar progress
@@ -66,13 +67,15 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-between bg-black relative">
+    <div className="min-h-screen flex items-center justify-between bg-black relative"
+  
+    >
       {/* Background and other decorations */}
       <div className="absolute inset-0 z-0 ">
         <img
           src="/main bg.png"
           alt="Background"
-          className="w-full h-full opacity-45"
+          className="w-full h-full opacity-90"
         />
       </div>
 
@@ -83,17 +86,16 @@ const Signup = () => {
         onLoaderFinished={() => setProgress(0)}
       />
 
-      {/* Form Section */}
-      <div className="w-1/2 flex justify-center flex-col">
+      <div className="w-1/2 flex justify-center flex-col ">
         <img
           src="/text.png" // Path to the CryptoVigil logo
           alt="CryptoVigil Logo"
-          className="max-w-full h-auto object-contain ml-8"
+          className="max-w-full h-auto object-contain ml-8 opacity-90"
         />
         hi there
       </div>
 
-      <div className="relative z-10 flex flex-col justify-center p-8 rounded-lg shadow-xl w-[30%] mr-36 bg-black/50 backdrop-blur-md border border-gray-600 ">
+      <div className="relative z-10 flex border-green-400 border-2 flex-col justify-center p-8 rounded-lg shadow-xl w-[30%] mr-36 bg-black/50 backdrop-blur-md  ">
         <h2 className="text-2xl font-bold text-white">Signup Into CryptoVigil</h2>
         <p className="text-sm text-gray-300 mt-2">
           Just some details to get you in!
@@ -159,6 +161,21 @@ const Signup = () => {
               placeholder="Re-enter your password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="aadhaar"
+              className="block text-sm font-medium text-gray-300"
+            >Aadhar Number
+            </label>
+            <input
+              type="password"
+              id="aadhaar"
+              className="w-full p-3 rounded-lg bg-transparent border-2 border-gray-600 focus:outline-none focus:border-green-500 text-white"
+              placeholder="Enter your Adhar for KYC"
+              valueaadhaarId={aadhaarId}
+              onChange={(e) => setAadhaarId(e.target.value)}
             />
           </div>
 
