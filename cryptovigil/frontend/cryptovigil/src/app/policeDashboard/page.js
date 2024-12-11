@@ -495,15 +495,17 @@ const router = useRouter(); // Use useRouter from "next/navigation"
 
 
   <div className="absolute inset-0 flex justify-between ml-[120px] ">
-  <div class="grid grid-cols-1 p-[55px] sm:grid-cols-2 gap-[120px] mt-[6px]">
+  <div className="grid grid-cols-1 p-[55px] sm:grid-cols-2 gap-[120px] mt-[6px]">
  
-  <div class=" h-[290px] w-[550px] ml-[-12px]  border-[#6b1212]  border-[10px] border rounded-sm bg-[#2e56a0]  opacity-75 text-white  shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface">
-    <div class=" px-6 py-3 font-bold text-center text-[20px] ">
+  <div classNam=" h-[290px] w-[550px] ml-[-12px]  border-[#6b1212]  border-[10px] border rounded-sm bg-[#2e56a0]  opacity-75 text-white  shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface">
+    <div className=" px-6 py-3 font-bold text-center text-[20px] ">
       Suspicious Wallet: 0000XXXX0000
     </div>
-    <div class="p-6">
-      <h3 class="mb-2 text-xl font-medium ">I.P Address: 192.158.1.38</h3>
-      <h3 class="mb-2 text-xl font-medium leading-tight">Balance: $5xxxx</h3>
+    <div className="p-6">
+      <h3 className
+="mb-2 text-xl font-medium ">I.P Address: 192.158.1.38</h3>
+      <h3 className
+="mb-2 text-xl font-medium leading-tight">Balance: $5xxxx</h3>
       <button
 
   className="mt-16 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md transform transition duration-300 hover:bg-green-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-800 dark:bg-blue-800 dark:hover:bg-blue-700 dark:focus:ring-blue-500 dark:active:bg-blue-700"
@@ -517,13 +519,14 @@ const router = useRouter(); // Use useRouter from "next/navigation"
   
   </div>
 
-  <div class=" h-[290px]  ml-4 w-[550px] border-[#6b1212]  border-[10px] rounded-sm bg-[#2e56a0]  opacity-75 text-white  shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface">
-    <div class=" px-6 py-3 font-bold text-center text-[20px] ">
+  <div classNam=" h-[290px]  ml-4 w-[550px] border-[#6b1212]  border-[10px] rounded-sm bg-[#2e56a0]  opacity-75 text-white  shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface">
+    <div className=" px-6 py-3 font-bold text-center text-[20px] ">
       Suspicious Wallet: 0000XXXX0000
     </div>
-    <div class="p-6">
-    <h3 class="mb-2 text-xl font-medium ">I.P Address: 192.158.1.38</h3>
-      <h3 class="mb-2 text-xl font-medium leading-tight">Balance: $5xxxx</h3>
+    <div className="p-6">
+    <h3 className="mb-2 text-xl font-medium ">I.P Address: 192.158.1.38</h3>
+      <h3 className
+="mb-2 text-xl font-medium leading-tight">Balance: $5xxxx</h3>
       <button
 
   className="mt-16 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md transform transition duration-300 hover:bg-green-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-800 dark:bg-blue-800 dark:hover:bg-blue-700 dark:focus:ring-blue-500 dark:active:bg-blue-700"
@@ -535,13 +538,14 @@ const router = useRouter(); // Use useRouter from "next/navigation"
     
   </div>
 
-  <div class=" h-[290px] w-[550px] ml-[-12px] border-[#6b1212]  border-[10px] rounded-sm bg-[#2e56a0]  opacity-75  text-white shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface">
-    <div class=" px-6 py-3 font-bold text-center text-[20px]">
+  <div classNam=" h-[290px] w-[550px] ml-[-12px] border-[#6b1212]  border-[10px] rounded-sm bg-[#2e56a0]  opacity-75  text-white shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface">
+    <div className=" px-6 py-3 font-bold text-center text-[20px]">
       Suspicious Wallet: 0000XXXX0000
     </div>
-    <div class="p-6">
-    <h3 class="mb-2 text-xl font-medium ">I.P Address: 192.158.1.38</h3>
-      <h3 class="mb-2 text-xl font-medium leading-tight">Balance: $5xxxx</h3>
+    <div className="p-6">
+    <h3 className="mb-2 text-xl font-medium ">I.P Address: 192.158.1.38</h3>
+      <h3 className
+="mb-2 text-xl font-medium leading-tight">Balance: $5xxxx</h3>
       <button
 
   className="mt-16 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md transform transition duration-300 hover:bg-green-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-800 dark:bg-blue-800 dark:hover:bg-blue-700 dark:focus:ring-blue-500 dark:active:bg-blue-700"
@@ -552,13 +556,14 @@ const router = useRouter(); // Use useRouter from "next/navigation"
     </div>
   </div>
 
-  <div class=" h-[290px] w-[550px] ml-4  border-[#6b1212]  border-[10px] rounded-sm bg-[#2e56a0]  opacity-75 text-white  shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface">
-    <div class=" px-6 py-3 font-bold text-center text-[20px] ">
+  <div classNam=" h-[290px] w-[550px] ml-4  border-[#6b1212]  border-[10px] rounded-sm bg-[#2e56a0]  opacity-75 text-white  shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface">
+    <div className=" px-6 py-3 font-bold text-center text-[20px] ">
       Suspicious Wallet: 0000XXXX0000
     </div>
-    <div class="p-6">
-    <h3 class="mb-2 text-xl font-medium ">I.P Address: 192.158.1.38</h3>
-      <h3 class="mb-2 text-xl font-medium leading-tight">Balance: $5xxxx</h3>
+    <div className="p-6">
+    <h3 className="mb-2 text-xl font-medium ">I.P Address: 192.158.1.38</h3>
+      <h3 className
+="mb-2 text-xl font-medium leading-tight">Balance: $5xxxx</h3>
       <button
 
   className="mt-16 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md transform transition duration-300 hover:bg-green-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-800 dark:bg-blue-800 dark:hover:bg-blue-700 dark:focus:ring-blue-500 dark:active:bg-blue-700"
