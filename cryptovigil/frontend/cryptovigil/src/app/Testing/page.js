@@ -1,9 +1,13 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import styles from "../styles/GetInForm.module.css";
+import Link from "next/link";
+
 
 const DemoPage = () => {
+
   const [datas, setDatas] = useState([]);
+  const [ip, setIp] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedRow, setSelectedRow] = useState(null); // State to track selected row for the modal
@@ -25,6 +29,16 @@ const DemoPage = () => {
       tanggal: "11 April 2022",
     },
   ];
+  const handleSubmit = () => {
+  
+    // Redirect to '/mapView' page, passing the IP as a query parameter
+    const router = useRouter();
+
+  // Redirect to '/mapView' with the IP as a query parameter
+  router.push(`/mapView?ip=${ip}`);
+    
+  };
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,6 +59,8 @@ const DemoPage = () => {
 
     fetchData();
   }, []);
+
+
   useEffect(() => {
     fetch('https://backend-ip.vercel.app/api/ip', {
       method: 'GET',
@@ -52,12 +68,14 @@ const DemoPage = () => {
     })
     .then((response) => response.json())
     .then((data) => {
+      setIp(data.ip);
       console.log('IP Address 2:', data.ip);
     })
     .catch((error) => {
       console.error('Error fetching IP:', error);
     });
   }, []);
+ 
 
   return (
     <div
@@ -188,7 +206,11 @@ const DemoPage = () => {
             >
               Close
             </button>
-            <button className="ml-[450px] bg-blue-600 w-max h-[38px] rounded-lg p-1 text-white"> View Location</button>
+            <Link href={`/mapView?ip=${ip}`}>          View Location
+        </Link>
+            <button className="ml-[450px] bg-blue-600 w-max h-[38px] rounded-lg p-1 text-white"
+             onClick={handleSubmit}
+           > View Location</button>
           </div>
         </div>
       )}

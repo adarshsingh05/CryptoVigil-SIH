@@ -45,7 +45,7 @@ const features = [
     status: "Flagged",
   },
   {
-    title: "Export Reports",
+    title: "Scrap Wallet Data",
     description:
       "Download transaction data for audits and analysis. Download complete pdf format data to get clear view of wallets,, Including Wallet id , Transaction, Gas Used and a lot more ",
     status: "Active",
@@ -224,7 +224,13 @@ const OfficialsPage = () => {
                         "https://bc-lemon.vercel.app/#!1AJbsFZ64EpEfS5UAjAfcUG8pH8Jn3rn1F"
                       ); // Redirect to /google when clicking the first card
                     }
+                    if (index === 5){
+                      router.push("https://node-view.vercel.app/")
+                    }
                   }}
+                  
+                    
+
                 >
                   <div className="flex justify-between items-center mb-4">
                     <h2
