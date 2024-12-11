@@ -184,13 +184,12 @@ const Home = () => {
     height={300}
     className="max-w-full object-contain"
   />
-  <p className="mt-6 text-lg">
+  <p className={`${ropaSans.className} mt-6 text-lg`}>
     Unmask the Chain—Track, Monitor, Protect.
   </p>
   <Link
     href="/get-started"
-    className="mt-4 py-2 px-6 bg-[#63D134] text-white font-bold rounded-full hover:opacity-90"
-  >
+    className={`${ropaSans.className} mt-4 py-2 px-6 bg-[#63D134] text-white font-extrabold rounded-full hover:opacity-90`}>
     Get Started!
   </Link>
 </section>
