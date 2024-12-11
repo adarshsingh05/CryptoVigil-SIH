@@ -1,12 +1,14 @@
+
 "use client";
+import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { Roboto } from "next/font/google";
-import styles from "../styles/GetInForm.module.css";
-import Image from "next/image";
+import styles from "./styles/GetInForm.module.css";
 import { useRouter } from "next/navigation";
 import { FaMoon, FaSun } from "react-icons/fa"; // Import icons for light/dark mode
 import { MdSearch } from "react-icons/md"; // Search icon
 import { FaArrowUp, FaArrowDown } from "react-icons/fa"; // Up and down arrows for price changes
+
 
 const roboto = Roboto({
   weight: ["400", "700"], // Valid weights for the font
@@ -14,6 +16,8 @@ const roboto = Roboto({
 });
 
 const features = [
+  
+ 
   {
     title: "Monitor Global Transaction",
     description:
@@ -21,7 +25,7 @@ const features = [
     status: "Explore",
   },
   {
-    title: "Peer to Peer Details (Need Login)",
+    title: "Get Peer to Peer Details",
     description:
       "Get peer to peer transation details done on this platform Without hampering user's personal Details.",
     status: "Explore",
@@ -35,7 +39,7 @@ const features = [
   {
     title: "Suspicious Transaction Alert",
     description:
-      "Ge alert on the go on your mobile device, if any sucpisous wallet is detected with every single details",
+      "Ge alert on the go on your mobile device, if any suspicious wallet is detected with every single details",
     status: "Active",
   },
   {
@@ -125,24 +129,25 @@ const OfficialsPage = () => {
   );
   let [userIP, setUserIP] = useState("");
   // getting current IP
-  useEffect(() => {
-    fetch("https://backend-ip.vercel.app/api/ip", {
-      method: "GET",
-      credentials: "include",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        userIP = data.ip;
-        setUserIP(data.ip);
-        console.log("IP Address:", data.ip);
-      })
-      .catch((error) => {
-        console.error("Error fetching IP:", error);
-      });
-  }, []);
-  const router = useRouter(); // Use useRouter from "next/navigation"
+useEffect(() => {
+  fetch('https://backend-ip.vercel.app/api/ip', {
+    method: 'GET',
+    credentials: 'include', 
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    userIP = data.ip;
+    setUserIP(data.ip);
+    console.log('IP Address:', data.ip);
+  })
+  .catch((error) => {
+    console.error('Error fetching IP:', error);
+  });
+}, []);
+const router = useRouter(); // Use useRouter from "next/navigation"
 
   return (
+    
     <div
       className={`min-h-screen ${
         darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"
@@ -155,7 +160,7 @@ const OfficialsPage = () => {
         } px-8 py-4 shadow-md`}
       >
         {/* Centered Logo and Title */}
-        <h1 className="text-2xl font-bold flex items-center justify-center mx-auto">
+        <h1 className="text-2xl font-bold text-center flex items-center justify-center mx-auto">
           <img
             className={`h-8 transition-all duration-300 ml-4 ${
               darkMode ? "" : "filter invert"
@@ -218,11 +223,10 @@ const OfficialsPage = () => {
                       ? "bg-gradient-to-r from-green-800 via-gray-900 to-green-500"
                       : "bg-gradient-to-r from-green-300 to-white"
                   }`}
+
                   onClick={() => {
                     if (index === 0) {
-                      router.push(
-                        "https://bc-lemon.vercel.app/#!1AJbsFZ64EpEfS5UAjAfcUG8pH8Jn3rn1F"
-                      ); // Redirect to /google when clicking the first card
+                      router.push("https://bc-lemon.vercel.app/#!1AJbsFZ64EpEfS5UAjAfcUG8pH8Jn3rn1F");  // Redirect to /google when clicking the first card
                     }
                   }}
                 >
@@ -262,7 +266,7 @@ const OfficialsPage = () => {
               darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
             }`}
           >
-            <h2 className="text-lg font-bold mb-4">Live Crypto Prices (INR)</h2>
+            <h2 className="text-lg font-bold text-center mb-4">Live Crypto Prices (INR)</h2>
             <hr className="mb-2"></hr>
             <ul>
               {cryptoPrices.map((crypto, index) => (
@@ -271,7 +275,7 @@ const OfficialsPage = () => {
                   className="flex justify-between items-center mb-4 p-3 rounded-lg shadow-md bg-gradient-to-r from-green-400 to-green-200"
                 >
                   <div>
-                    <p className="font-bold">{crypto.name}</p>
+                    <p className="font-bold text-center">{crypto.name}</p>
                     <p className="text-sm text-gray-700">{crypto.symbol}</p>
                   </div>
                   <div className="flex items-center">
@@ -339,84 +343,77 @@ const OfficialsPage = () => {
             </div>
           </div>
 
-          <div className="mt-4 ml-10 border-[#3cabfa] rounded-lg w-[55%]">
-  <div className="relative bg-transparent h-[70vh]"> {/* Adjust height */}
+          {/* ANCHAL EDIT SECTION START */}
+ {/* side div 2 */}
+<div className="mt-4 ml-10 border-4 border-[#3cabfa] rounded-lg w-[55%]">
+  <div className="relative  bg-transparent"> {/* Set the height to full screen */}
     {/* Background Image */}
     <Image
       src="/target.png"
       alt="Background"
       layout="fill" // Fill the section
       objectFit="cover" // Cover the entire section
-      className="shadow-lg rounded-lg" // Add a shadow and rounded corners
+      className="shadow-lg"
     />
-    <div className="absolute inset-0 bg-black opacity-50 z-0"></div>
+
+<div className="absolute inset-0 bg-black opacity-50 z-0"></div>
+
     {/* Text for Features */}
     <p className="absolute inset-0 text-center text-[30px] mt-2 text-white">
       Features Of Global Transaction Tracking
     </p>
-    <div className="relative z-10 flex flex-col items-center">
-      <div
-        className={`mt-20 ${
-          darkMode ? "" : "bg-white bg-opacity-30"
-        } rounded-lg mb-10`}
-      >
-        {/* First Section */}
-        <div className="h-1/2 flex flex-col relative items-center">
-          <div className="flex">
-            <div className="w-full p-4 bg-transparent text-left">
-              <div className="flex flex-row mt-2">
-                <img
-                  src="/Cryptocurrency-Transactions.png"
-                  alt="wallet"
-                  className="h-[125px] w-[200px] p-2"
-                />
-                <div className="text-center mt-4 relative z-10">
-                  <p className="text-xl text-left ml-4 text-white">
-                    Complete Wallet Insights Includes
-                  </p>
-                  <ul>
-                    <li className="text-left ml-4 text-white">
-                      Wallet ID - Wallet Balance
-                    </li>
-                    <li className="text-left ml-4 text-white">
-                      Wallet Transactions
-                    </li>
-                    <li className="text-left ml-4 text-white">
-                      Wallet Address
-                    </li>
-                  </ul>
-                </div>
-              </div>
+
+    <div className="relative z-10 flex flex-col items-center ">
+    <div className={` mt-20  ${darkMode ? '' : 'bg-white bg-opacity-30'} rounded-lg  mb-10 `}>
+
+
+    {/* First Section */}
+    <div className="h-1/2 flex flex-col relative items-center">
+      <div className="flex">
+        
+        <div className="w-full p-4 bg-transparent text-left">
+          <div className="flex flex-row mt-2">
+            <img
+              src="/Cryptocurrency-Transactions.png"
+              alt="wallet"
+              className="h-[125px] w-[200px] p-2"
+            />
+            <div className="text-center mt-4 relative z-10">
+              <p className="text-xl text-left ml-4 text-white">
+                Complete Wallet Insights Includes
+              </p>
+              <ul>
+                <li className="text-left ml-4 text-white">Wallet ID - Wallet Balance</li>
+                <li className="text-left ml-4 text-white">Wallet Transactions</li>
+                <li className="text-left ml-4 text-white">Wallet Address</li>
+              </ul>
+          
             </div>
           </div>
         </div>
+      </div>
+    </div>
 
-        {/* Second Section */}
-        <div className="h-1/2 flex flex-col relative items-center">
-          <div className="flex">
-            <div className="w-full p-4 bg-transparent text-center">
-              <div className="flex flex-row">
-                <img
-                  src="/Blockchain.png"
-                  alt="wallet"
-                  className="h-[125px] w-[200px] p-2"
-                />
-                <div className="text-center mt-2 relative z-10">
-                  <p className="text-xl text-left ml-4 text-white">
-                    Complete Wallet Insights Includes
-                  </p>
-                  <ul>
-                    <li className="text-left ml-4 text-white">
-                      Wallet ID - Wallet Balance
-                    </li>
-                    <li className="text-left ml-4 text-white">
-                      Wallet Transactions
-                    </li>
-                    <li className="text-left ml-4 text-white">
-                      Wallet Address
-                    </li>
-                  </ul>
-                </div>
+    {/* Second Section */}
+    <div className="h-1/2 flex flex-col relative items-center">
+      <div className="flex">
+
+        <div className="w-full p-4 bg-transparent text-center">
+          <div className="flex flex-row">
+            <img
+              src="/Blockchain.png"
+              alt="wallet"
+              className="h-[125px] w-[200px] p-2"
+            />
+            <div className="text-center mt-2 relative z-10">
+              <p className="text-xl text-left ml-4 text-white">
+                Complete Wallet Insights Includes
+              </p>
+              <ul>
+                <li className="text-left ml-4 text-white">Wallet ID - Wallet Balance</li>
+                <li className="text-left ml-4 text-white">Wallet Transactions</li>
+                <li className="text-left ml-4 text-white">Wallet Address</li>
+              </ul>
               </div>
             </div>
           </div>
@@ -424,7 +421,10 @@ const OfficialsPage = () => {
       </div>
     </div>
   </div>
+  </div>
 </div>
+
+
 
           {/* ANCHAL eDIT SECTION ENDS */}
         </div>
@@ -447,68 +447,136 @@ const OfficialsPage = () => {
           LOCATE WALLET ON MAP
         </div>
         <div className="relative w-full h-screen">
-          <div className="relative w-full h-screen">
-            <img
-              src="/HOME LOGIN.png"
-              alt="location"
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute mt-40 mr-14 top-0 right-0 h-full w-1/3 p-2 ">
-              <div className="bg-transparent border border-1 border-white rounded-lg shadow-lg py-6">
-                <div className={styles.container}>
-                  <h1 className={styles.title}>Wallet Location Tracer</h1>
-                  <hr className="bg-green-700"></hr>
-                  <form className={styles.form}>
-                    <label className="text-left text-xl">
-                      Organization Code
-                    </label>
-                    <input
-                      type="password"
-                      placeholder="ABC1234"
-                      className={styles.input}
-                      required
-                    />
-                    <label className="text-left text-xl">Validated IP</label>
-                    <input
-                      type="password"
-                      placeholder="Fetching Your IP"
-                      className={styles.input}
-                      disabled
-                      readOnly
-                      required
-                      value={userIP}
-                    />
-                    <button
-                      type="submit"
-                      className={styles.trackButton}
-                      onClick={() => {
-                        router.push("Testing");
-                      }}
-                    >
-                      TRACK
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div className="relative w-full h-screen">
+  <img
+    src="/HOME LOGIN.png"
+    alt="location"
+    className="h-full w-full object-cover"
+  />
+  <div className="absolute mt-40 mr-14 top-0 right-0 h-full w-1/3 p-2 ">
+  <div className="bg-transparent border border-1 border-white rounded-lg shadow-lg py-6">
+    <div className={styles.container}>
+    <h1 className={styles.title}>Wallet Location Tracer</h1>
+    <hr className="bg-green-700"></hr>
+      <form className={styles.form}>
+        <label className="text-left text-xl">Organization Code</label>
+        <input type="password" placeholder="ABC1234" className={styles.input} required />
+        <label  className="text-left text-xl">Validated IP</label>
+        <input type="password" placeholder="Fetching Your IP" className={styles.input} disabled readOnly required
+        value={userIP} />
+        <button type="submit" className={styles.trackButton}
+          onClick={() => {
+                   
+            router.push("Testing"); 
+          
+        }}>
+          TRACK
+        
+        </button>
+      </form>
+      
+    </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
       </div>
-      <h1
-        className={`ext-white text-4xl font-bold justify-center items-center ml-[40%] mb-5 mt-2 font-mono ${
-          darkMode ? "text-white" : "text-black"
-        } `}
-      >
-        Sucpisous Wallets
-      </h1>
+      <h1 className={` text-4xl font-bold justify-center items-center ml-[40%] mb-5 mt-2 font-mono ${
+              darkMode ? "text-white" : "text-black"
+            } `}>Suspicious Wallets</h1>
+            
 
       <div
-        className="relative bg-cover bg-center h-screen"
-        style={{ backgroundImage: "url('/Aksi.jpg')" }}
-      >
-        <div className="absolute inset-0 bg-black bg-opacity-0 flex justify-center "></div>
-      </div>
+  className="relative bg-cover bg-center h-screen"
+  style={{ backgroundImage: "url('/Aksi.jpg')" }}
+>
+
+
+  <div className="absolute inset-0 flex justify-between ml-[120px] ">
+  <div class="grid grid-cols-1 p-[55px] sm:grid-cols-2 gap-[120px] mt-[6px]">
+ 
+  <div class=" h-[290px] w-[550px] ml-[-12px]  border-[#6b1212]  border-[10px] border rounded-sm bg-[#2e56a0]  opacity-75 text-white  shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface">
+    <div class=" px-6 py-3 font-bold text-center text-[20px] ">
+      Suspicious Wallet: 0000XXXX0000
     </div>
+    <div class="p-6">
+      <h3 class="mb-2 text-xl font-medium ">I.P Address: 192.158.1.38</h3>
+      <h3 class="mb-2 text-xl font-medium leading-tight">Balance: $5xxxx</h3>
+      <button
+
+  className="mt-16 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md transform transition duration-300 hover:bg-green-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-800 dark:bg-blue-800 dark:hover:bg-blue-700 dark:focus:ring-blue-500 dark:active:bg-blue-700"
+>
+  Track
+</button>
+
+
+     
+    </div>
+  
+  </div>
+
+  <div class=" h-[290px]  ml-4 w-[550px] border-[#6b1212]  border-[10px] rounded-sm bg-[#2e56a0]  opacity-75 text-white  shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface">
+    <div class=" px-6 py-3 font-bold text-center text-[20px] ">
+      Suspicious Wallet: 0000XXXX0000
+    </div>
+    <div class="p-6">
+    <h3 class="mb-2 text-xl font-medium ">I.P Address: 192.158.1.38</h3>
+      <h3 class="mb-2 text-xl font-medium leading-tight">Balance: $5xxxx</h3>
+      <button
+
+  className="mt-16 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md transform transition duration-300 hover:bg-green-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-800 dark:bg-blue-800 dark:hover:bg-blue-700 dark:focus:ring-blue-500 dark:active:bg-blue-700"
+>
+  Track
+</button>
+    
+    </div>
+    
+  </div>
+
+  <div class=" h-[290px] w-[550px] ml-[-12px] border-[#6b1212]  border-[10px] rounded-sm bg-[#2e56a0]  opacity-75  text-white shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface">
+    <div class=" px-6 py-3 font-bold text-center text-[20px]">
+      Suspicious Wallet: 0000XXXX0000
+    </div>
+    <div class="p-6">
+    <h3 class="mb-2 text-xl font-medium ">I.P Address: 192.158.1.38</h3>
+      <h3 class="mb-2 text-xl font-medium leading-tight">Balance: $5xxxx</h3>
+      <button
+
+  className="mt-16 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md transform transition duration-300 hover:bg-green-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-800 dark:bg-blue-800 dark:hover:bg-blue-700 dark:focus:ring-blue-500 dark:active:bg-blue-700"
+>
+  Track
+</button>
+    
+    </div>
+  </div>
+
+  <div class=" h-[290px] w-[550px] ml-4  border-[#6b1212]  border-[10px] rounded-sm bg-[#2e56a0]  opacity-75 text-white  shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface">
+    <div class=" px-6 py-3 font-bold text-center text-[20px] ">
+      Suspicious Wallet: 0000XXXX0000
+    </div>
+    <div class="p-6">
+    <h3 class="mb-2 text-xl font-medium ">I.P Address: 192.158.1.38</h3>
+      <h3 class="mb-2 text-xl font-medium leading-tight">Balance: $5xxxx</h3>
+      <button
+
+  className="mt-16 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md transform transition duration-300 hover:bg-green-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-800 dark:bg-blue-800 dark:hover:bg-blue-700 dark:focus:ring-blue-500 dark:active:bg-blue-700"
+>
+  Track
+</button>
+    </div>
+    
+  </div>
+</div>
+
+  </div>
+  
+</div>
+
+
+    </div>
+    
   );
 };
 
