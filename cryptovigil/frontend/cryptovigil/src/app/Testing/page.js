@@ -45,6 +45,19 @@ const DemoPage = () => {
 
     fetchData();
   }, []);
+  useEffect(() => {
+    fetch('https://backend-ip.vercel.app/api/ip', {
+      method: 'GET',
+      credentials: 'include', 
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('IP Address 2:', data.ip);
+    })
+    .catch((error) => {
+      console.error('Error fetching IP:', error);
+    });
+  }, []);
 
   return (
     <div
@@ -164,6 +177,7 @@ const DemoPage = () => {
             <p><strong>Status:</strong> {selectedRow.status}</p>
             <p><strong>Gas Used:</strong> {selectedRow.gasUsed}</p>
             <p><strong>Block Hash:</strong> {selectedRow.blockHash}</p>
+            <p><strong>Sender's IP:</strong> {selectedRow.ip}</p>
             <p>
               <strong>Time:</strong>{" "}
               {new Date(selectedRow.timestamp).toLocaleString("en-GB")}
@@ -174,6 +188,7 @@ const DemoPage = () => {
             >
               Close
             </button>
+            <button className="ml-[450px] bg-blue-600 w-max h-[38px] rounded-lg p-1 text-white"> View Location</button>
           </div>
         </div>
       )}

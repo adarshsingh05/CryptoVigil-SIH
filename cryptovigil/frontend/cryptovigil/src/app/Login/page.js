@@ -47,6 +47,7 @@ export default function Login() {
 
       if (response.ok) {
         // alert(data.msg || "Login successful!");
+        console.log("done")
         localStorage.setItem("token", data.token); // Store token
 
         setIsLoggedIn(true); // Set isLoggedIn to true after successful login

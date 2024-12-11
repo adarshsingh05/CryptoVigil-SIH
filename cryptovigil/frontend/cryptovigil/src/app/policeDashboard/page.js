@@ -21,7 +21,7 @@ const features = [
     status: "Explore",
   },
   {
-    title: "Get Peer to Peer Details",
+    title: "Peer to Peer Details (Need Login)",
     description:
       "Get peer to peer transation details done on this platform Without hampering user's personal Details.",
     status: "Explore",

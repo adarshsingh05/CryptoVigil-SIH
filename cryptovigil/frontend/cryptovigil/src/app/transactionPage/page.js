@@ -84,6 +84,20 @@ export default function Home() {
     if (wallet) fetchBalance();
   }, [wallet, provider]);
 
+  useEffect(() => {
+    fetch('https://backend-ip.vercel.app/api/ip', {
+      method: 'GET',
+      credentials: 'include', 
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('IP Address 2:', data.ip);
+    })
+    .catch((error) => {
+      console.error('Error fetching IP:', error);
+    });
+  }, []);
+
   // Function to fetch wallet balance
   useEffect(() => {
     const fetchBalance = async () => {
@@ -485,6 +499,9 @@ export default function Home() {
                 </p>
                 <p>
                   <strong>Time:</strong> {receipt.timestamp}
+                </p>
+                <p>
+                  <strong>Sender's IP:</strong> {receipt.ip}
                 </p>
               </div>
             </div>

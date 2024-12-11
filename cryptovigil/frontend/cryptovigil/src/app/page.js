@@ -251,7 +251,9 @@ const Home = () => {
           <div className="bg-gradient-to-b from-[#63D134] to-black text-white shadow-lg p-6 flex flex-col items-center justify-between h-[28rem] w-[13rem] m-2">
             <div className="text-center">
               <h3 className={`${ropaSans.className} text-[36px] font-bold mb-12 p-[5px]`}>
-                Crypto Transfer 
+              <Link href="/testing" className="text-white"
+
+                > Crypto Transfer</Link>
               </h3>
               
               <hr className="mt-"></hr>
@@ -261,7 +263,7 @@ const Home = () => {
               </p>
             </div>
             <Link
-              href="#"
+              href="/transactionPage"
               className="inline-block py-2 px-6 border border-white text-white font-semibold rounded-full hover:bg-green-600 hover:text-white transition duration-300"
             >
               Explore
@@ -300,7 +302,7 @@ const Home = () => {
               </p>
             </div>
             <Link
-              href="#"
+              href="/policeDashboard"
               className="inline-block mb-2 py-2 px-6 border border-white text-white font-semibold rounded-full hover:bg-green-600 hover:text-white transition duration-300"
             >
               Explore
@@ -321,7 +323,7 @@ const Home = () => {
               </p>
             </div>
             <Link
-              href="#"
+              href="https://bc-lemon.vercel.app/#!1AJbsFZ64EpEfS5UAjAfcUG8pH8Jn3rn1F"
               className="inline-block py-2 px-6 border border-white text-white font-semibold rounded-full hover:bg-green-600 hover:text-white transition duration-300"
             >
               Explore
