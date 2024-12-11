@@ -3,6 +3,11 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation"; // Correct import for the router
 import { Typewriter } from "react-simple-typewriter";
 import Link from "next/link";
+import { Noto_Sans } from "next/font/google";
+const notoSans = Noto_Sans({
+  subsets: ["latin"],
+  weight: ["400", "700"], 
+});
 
 import LoginSuccess from "../components/LoginSuccess";
 
@@ -16,7 +21,7 @@ export default function Login() {
      
       setIsLoggedIn(true); // Set loading to true when login is successful
       setTimeout(() => {
-        router.push("/"); // 
+        router.push("/LandingPage"); // Redirect to LandingPage after 5 seconds
       }, 5000); // 5 seconds delay
     }
   }, [isLoggedIn, router]);
@@ -47,7 +52,6 @@ export default function Login() {
 
       if (response.ok) {
         // alert(data.msg || "Login successful!");
-        console.log("done")
         localStorage.setItem("token", data.token); // Store token
 
         setIsLoggedIn(true); // Set isLoggedIn to true after successful login
@@ -95,19 +99,19 @@ export default function Login() {
 
           {/* Right Section: Login Form */}
           <div className="w-1/2 flex justify-center">
-            <div className="bg-transparent bg-opacity-20 backdrop-blur-md p-6 rounded-xl shadow-lg max-w-sm w-full border border-white">
-              <h1 className="text-2xl font-bold text-white mb-2">Login</h1>
-              <p className="text-gray-400 mb-4">Glad you're back.!</p>
+            <div className="bg-transparent bg-opacity-20 backdrop-blur-lg p-6 py-12 rounded-xl shadow-lg max-w-md h-[600px] w-full border border-white">
+              <h1 className={` ${notoSans.className} text-[36px] font-bold text-white mb-2`}>Login</h1>
+              <p className={` ${notoSans.className} text-gray-400 mb-4`}>Glad you're back!</p>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Username Field */}
                 <div>
                   <input
                     type="text"
-                    placeholder="email"
+                    placeholder="Email"
                     id="username"
                     value={email}
-                    className="w-full px-4 py-2 bg-transparent border rounded-md text-white placeholder-gray-500 focus:outline-none focus:ring focus:ring-green-500"
+                    className="w-full px-4 py-3 bg-transparent border border-2 rounded-2xl text-[20px] text-white placeholder-gray-500 focus:outline-none focus:ring focus:ring-green-500"
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
@@ -119,7 +123,7 @@ export default function Login() {
                     placeholder="Password"
                     id="password"
                     value={password}
-                    className="w-full px-4 py-2 bg-transparent border rounded-md text-white placeholder-gray-500 focus:outline-none focus:ring focus:ring-green-500"
+                    className="w-full px-4 py-3 bg-transparent border border-2 rounded-2xl text-[20px] text-white placeholder-gray-500 focus:outline-none focus:ring focus:ring-green-500"
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
@@ -131,7 +135,7 @@ export default function Login() {
                     id="remember"
                     className="mr-2 accent-green-500"
                   />
-                  <label htmlFor="remember" className="text-gray-400">
+                  <label htmlFor="remember" className="text-gray-400 ">
                     Remember me
                   </label>
                 </div>
@@ -139,7 +143,7 @@ export default function Login() {
                 {/* Login Button */}
                 <button
                   type="submit"
-                  className="w-full py-2 bg-gradient-to-r from-purple-500 to-green-500 text-white font-bold rounded-md hover:opacity-90 transition"
+                  className={`${notoSans.className} w-full py-3 bg-gradient-to-r from-purple-500 to-green-500 text-[20px] text-white font-bold rounded-xl hover:opacity-90 transition`}
                 >
                   Login
                 </button>
@@ -157,20 +161,25 @@ export default function Login() {
                   </Link>
                 </a>
               </div>
-              <hr className="mt-4" />
+           
 
               {/* Social Login */}
               <div className="text-center mt-4">
-                <p className="text-gray-400 mb-3">Or</p>
-                <div className="flex justify-center space-x-4">
-                  <button className="w-10 h-10 bg-transparent rounded-full flex items-center justify-center">
-                    <img src="/googler.png" alt="Google" className="w-8 h-8" />
+              <div class="flex items-center my-4">
+              <div class="flex-grow border-t-2 border-gray-500"></div>
+              <span class="mx-4 text-gray-500">OR</span>
+             <div class="flex-grow border-t-2 border-gray-500"></div>
+ 
+              </div>
+                <div className="flex justify-center space-x-4 mt-6">
+                  <button className="w-10 h-10 bg-transparent rounded-full flex items-center justify-center ">
+                    <img src="/googler.png" alt="Google" className="w-9 h-9" />
                   </button>
                   <button className="w-10 h-10 bg-transparent rounded-full flex items-center justify-center">
-                    <img src="/flogo.png" alt="Facebook" className="w-9 h-9" />
+                    <img src="/flogo.png" alt="Facebook" className="w-10 h-12" />
                   </button>
                   <button className="w-10 h-10 bg-transparent rounded-full flex items-center justify-center">
-                    <img src="/git.png" alt="GitHub" className="w-9 h-9" />
+                    <img src="/git.png" alt="GitHub" className="w-10 h-10" />
                   </button>
                 </div>
               </div>
