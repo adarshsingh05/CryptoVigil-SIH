@@ -7,7 +7,27 @@ import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Typewriter } from "react-simple-typewriter";
+import { Exo } from 'next/font/google';
+import { Ropa_Sans } from 'next/font/google'
+import { Orbitron } from 'next/font/google'
 
+
+const exo = Exo({
+  weight: ['400', '500', '700'],  
+  subsets: ['latin'],             
+})
+
+
+
+const ropaSans = Ropa_Sans({
+  weight: '400', // Only weight 400 is available
+  subsets: ['latin'], // Latin subset
+})
+
+const orbitron = Orbitron({
+  weight: '400', // You can specify the weight you want (400 is the default)
+  subsets: ['latin'], // Optional: Load the Latin subset (you can add more if needed)
+});
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -131,7 +151,7 @@ const Home = () => {
           {/* Conditionally render Login/Sign Up or Dashboard */}
 
           <Link
-            href={user ? '/UserDashBoard' : '/Login'}
+            href={user ? '/profile' : '/Login'}
             className="text-white border-2 border-transparent hover:text-green-500 hover:border-green-500 hover:rounded-full py-2 px-4 transition-all duration-300"
           >
             PROFILE
@@ -164,13 +184,12 @@ const Home = () => {
     height={300}
     className="max-w-full object-contain"
   />
-  <p className="mt-6 text-lg">
+  <p className={`${ropaSans.className} mt-6 text-lg`}>
     Unmask the Chain—Track, Monitor, Protect.
   </p>
   <Link
     href="/get-started"
-    className="mt-4 py-2 px-6 bg-[#63D134] text-white font-bold rounded-full hover:opacity-90"
-  >
+    className={`${ropaSans.className} mt-4 py-2 px-6 bg-[#63D134] text-white font-extrabold rounded-full hover:opacity-90`}>
     Get Started!
   </Link>
 </section>
@@ -217,12 +236,13 @@ const Home = () => {
         style={{ backgroundImage: "url('/bgsection2.png')" }}
       >
         <p
-          className="text-6xl text-center mt-6 mb-3 font-bold tracking-widest uppercase"
+          className="text-6xl text-center mt-6 mb-3 font-bold tracking-widest uppercase tracking-tight"
           style={{
-            fontFamily: "GeistMono",
+            fontFamily: "Exo, sans-serif",
+            letterSpacing: "0.0rem"
           }}
         >
-          Our <span className="text-green-700">Services</span>
+          Our <span className="font-exo text-green-700">Services</span>
         </p>
 
         {/* Card 1 */}
@@ -230,14 +250,14 @@ const Home = () => {
           {/* Card 1 */}
           <div className="bg-gradient-to-b from-[#63D134] to-black text-white shadow-lg p-6 flex flex-col items-center justify-between h-[28rem] w-[13rem] m-2">
             <div className="text-center">
-              <h3 className="text-xl font-bold mb-4">
-                Wallet Management & Compliance
+              <h3 className={`${ropaSans.className} text-[36px] font-bold mb-12 p-[5px]`}>
+                Crypto Transfer 
               </h3>
-              <hr></hr>
-              <p className="text-lg mb-6 mt-2">
-                Link multiple wallets, monitor balances, and flag risks
-                seamlessly, with integrated KYC verification ensuring regulatory
-                compliance.
+              
+              <hr className="mt-"></hr>
+              <p className={`${ropaSans.className} mb-6 mt-2`}>
+              Sending digital assets between wallets on a blockchain, 
+              enabling secure, decentralized transactions without intermediaries.
               </p>
             </div>
             <Link
@@ -251,14 +271,13 @@ const Home = () => {
           {/* Card 2 */}
           <div className="bg-gradient-to-b from-[#63D134] to-black text-white shadow-lg p-6 flex flex-col items-center justify-between h-[28rem] w-[13rem]  m-2">
             <div className="text-center">
-              <h3 className="text-xl font-bold mb-4">
-                Smart Notifications & Insights
+              <h3 className={`text-[36px] font-bold mb-2 ${ropaSans.className}`}>
+                Monitor Crypto transactions 
               </h3>
               <hr></hr>
-              <p className="text-lg mb-6 mt-2">
-                Get real-time updates on flagged transactions and access a
-                user-friendly dashboard for advanced analytics and wallet
-                insights.
+              <p className={`${ropaSans.className} mb-6 mt-2`}>
+              Tracking blockchain activity, 
+              verifying transaction details, ensuring security, and detecting potential fraud.
               </p>
             </div>
             <Link
@@ -270,16 +289,35 @@ const Home = () => {
           </div>
 
           {/* Card 3 */}
-          <div className="bg-gradient-to-b from-[#63D134] to-black text-white shadow-lg p-6 flex flex-col items-center justify-between h-[28rem] w-[13rem]  m-2">
+          <div className="bg-gradient-to-b from-[#63D134] to-black text-white shadow-lg p-4 flex flex-col items-center justify-between h-[28rem] w-[13rem]  m-2">
             <div className="text-center">
-              <h3 className="text-xl font-bold mb-4">
-                Trusted Exchange Support
+              <h3 className={`text-[36px] font-bold mb-4 ${ropaSans.className}`}>
+                Locate and Detect Fraud Wallets 
               </h3>
               <hr></hr>
-              <p className="text-lg mb-6 mt-2">
-                Connect effortlessly with leading platforms like Binance,
-                Coinbase, and Kraken for a streamlined and secure crypto
-                experience.
+              <p className={`${ropaSans.className} mb-6 mt-2`}>
+              Analyzing transaction patterns, identify suspicious activity, and using blockchain tools to flag illicit addresses.
+              </p>
+            </div>
+            <Link
+              href="#"
+              className="inline-block mb-2 py-2 px-6 border border-white text-white font-semibold rounded-full hover:bg-green-600 hover:text-white transition duration-300"
+            >
+              Explore
+            </Link>
+          </div>
+
+          {/* New card*/}
+          <div className="bg-gradient-to-b from-[#63D134] to-black text-white shadow-lg p-6 flex flex-col items-center justify-between h-[28rem] w-[13rem]  m-2">
+            <div className="text-center">
+              <h3 className={`text-[36px] font-bold mb-4 ${ropaSans.className}`}>
+                 Fund Movement Analysis
+              </h3>
+              <hr></hr>
+              <p className={`${ropaSans.className} mb-6 mt-2`}>
+              Examines transaction patterns, 
+              identify anomalies, potential fraud by tracking 
+              fund flows across blockchain networks.
               </p>
             </div>
             <Link
@@ -290,14 +328,15 @@ const Home = () => {
             </Link>
           </div>
 
+
           {/* Card 4 */}
           <div className="bg-gradient-to-b from-[#63D134] to-black text-white shadow-lg p-6 flex flex-col items-center justify-between h-[28rem] w-[13rem]  m-2">
             <div className="text-center">
-              <h3 className="text-xl font-bold mb-4">
+              <h3 className={`text-[36px] font-bold mb-4 ${ropaSans.className}`}>
                 Advanced Security Features
               </h3>
-              <hr></hr>
-              <p className="text-lg mb-6 mt-2">
+              <hr ></hr>
+              <p className={`${ropaSans.className} mb-6 mt-2 `}>
                 Protect your assets with multi-layered encryption, two-factor
                 authentication, and real-time risk monitoring.
               </p>
@@ -327,7 +366,7 @@ const Home = () => {
     {/* Text Content - Left and Right */}
     <div className="absolute inset-0 flex items-center justify-between px-6 md:px-16">
       {/* Left Text */}
-      <div className="w-1/2 text-[#63D134] text-[36px] font-semibold  sm:text-left ml-[-10px] mb-7 sm:ml-[100px]">
+      <div className={`${orbitron.className}  w-1/2 text-[#63D134] text-[36px] font-bold sm:text-left ml-[-10px] mb-7 sm:ml-[100px]`}>
         Why Choose
         <div className=" text-white ">
          
@@ -336,9 +375,9 @@ const Home = () => {
       </div>
 
       {/* Right Text */}
-      <div className="w-1/2 text-white text-[36px] font-semibold text-left ml-20">
+      <div className={`${ropaSans.className} w-1/2 text-white text-[36px] font-semibold text-left ml-20`}>
         Trust • Security • Transparency
-        <div className="text-[25px] text-left mt-6">
+        <div className={'${ropaSans.className} text-[25px] text-left mt-6'}>
           Monitor, track, and secure your crypto with real-time alerts, wallet
           tracking, and KYC compliance. Whether you're an individual or business,
           safeguard your assets with confidence.
@@ -370,7 +409,7 @@ const Home = () => {
 
     {/* Text Content */}
     <div className="absolute inset-0 flex flex-col justify-center items-center px-6">
-      <div className="text-[50px] text-white font-bold text-center mb-8 mt-[20px]">
+      <div className={`${orbitron.className} text-[50px] text-white font-bold text-center mb-8 mt-[20px]`}>
         CONNECTING THE WORLD THROUGH CRYPTO TRANSPARENCY
       </div>
 
@@ -378,9 +417,9 @@ const Home = () => {
       <div className="flex justify-between px-6 mt-[20px] gap-6">
         {/* Card 1 */}
         <div className="w-1/4 text-white text-[25px] font-semibold text-center p-6 rounded-lg shadow-lg">
-          <div>Global Accessibility With Any IP</div>
+          <div className={`${ropaSans.className}`}>Global Accessibility With Any IP</div>
           <div className="border-b-[3px] border-[#63D134] mt-2"></div>
-          <div className="font-light mt-[30px]">
+          <div className={`${ropaSans.className} font-light mt-[30px]`}>
             Access anytime, anywhere—no borders. With multi-currency support, we
             ensure inclusivity for users worldwide.
           </div>
@@ -388,9 +427,9 @@ const Home = () => {
 
         {/* Card 2 */}
         <div className="w-1/4 text-white text-[25px] font-semibold text-center p-6 rounded-lg shadow-lg">
-          <div>Building Trust Across Borders</div>
+          <div className={`${ropaSans.className}`}>Building Trust Across Borders</div>
           <div className="border-b-[3px] border-[#63D134] mt-2"></div>
-          <div className="font-light mt-[30px]">
+          <div className={`${ropaSans.className} font-light mt-[30px]`}>
             Promoting transparency builds trust globally. Seamless integration with
             international exchanges ensures smooth cross-border transactions.
           </div>
@@ -398,9 +437,9 @@ const Home = () => {
 
         {/* Card 3 */}
         <div className="w-1/4 text-white text-[25px] font-semibold text-center p-6 rounded-lg shadow-lg">
-          <div>Universal Security Standards</div>
-          <div className="border-b-[3px] border-[#63D134] mt-2"></div>
-          <div className="font-light mt-[30px]">
+          <div className={`${ropaSans.className} p-1`}>Universal Security Standards</div>
+          <div className="border-b-[3px] border-[#63D134] "></div>
+          <div className={`${ropaSans.className} font-light mt-[30px]`}>
             Adhering to global security standards. Real-time monitoring and KYC
             compliance. Secure and fraud-free crypto transactions.
           </div>
@@ -408,9 +447,9 @@ const Home = () => {
 
         {/* Card 4 */}
         <div className="w-1/4 text-white text-[25px] font-semibold text-center p-6 rounded-lg shadow-lg">
-          <div>Driving Global Collaboration</div>
-          <div className="border-b-[3px] border-[#63D134] mt-2"></div>
-          <div className="font-light mt-[30px]">
+          <div className={`${ropaSans.className} `}>Driving Global Collaboration</div>
+          <div className="border-b-[3px] border-[#63D134] mt-12"></div>
+          <div className={`${ropaSans.className} font-light mt-[30px]`}>
             User-friendly dashboards and analytics drive growth. Secure insights
             foster seamless global crypto partnerships.
           </div>
